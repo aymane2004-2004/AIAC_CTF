@@ -1,0 +1,747 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>AIAC CTF TRAINING | Advanced Cyber Arena</title>
+    <!-- Font Awesome 6 (free icons) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <!-- Google Fonts: modern & clean -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,600;14..32,700;14..32,800&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Space Grotesk', 'Inter', sans-serif;
+            background: radial-gradient(circle at 10% 20%, #0a0c18, #03050b);
+            color: #eef5ff;
+            line-height: 1.5;
+            scroll-behavior: smooth;
+        }
+
+        /* custom scroll */
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #0a0e1a;
+            border-radius: 10px;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #2dd4bf;
+            border-radius: 10px;
+        }
+
+        /* modern glassmorphism + neon */
+        .glow-text {
+            text-shadow: 0 0 12px rgba(0, 255, 255, 0.7);
+        }
+        .neon-border {
+            box-shadow: 0 0 8px rgba(45, 212, 191, 0.3);
+        }
+
+        /* navigation bar */
+        .navbar {
+            backdrop-filter: blur(16px);
+            background: rgba(3, 7, 18, 0.85);
+            border-bottom: 1px solid rgba(45, 212, 191, 0.4);
+            padding: 1rem 2rem;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .logo {
+            font-size: 1.6rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #aaffff, #2dd4bf, #3b82f6);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            letter-spacing: -0.5px;
+        }
+        .logo i {
+            background: none;
+            -webkit-background-clip: unset;
+            color: #2dd4bf;
+            margin-right: 8px;
+        }
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            font-weight: 600;
+        }
+        .nav-links a {
+            color: #ccddf8;
+            text-decoration: none;
+            transition: 0.2s;
+            font-size: 0.95rem;
+        }
+        .nav-links a:hover {
+            color: #2dd4bf;
+            text-shadow: 0 0 6px cyan;
+        }
+
+        /* hero section */
+        .hero {
+            text-align: center;
+            padding: 4rem 2rem 3rem;
+            background: radial-gradient(circle at 30% 40%, #0f1629, #02040c);
+            border-bottom: 1px solid #1e2f44;
+        }
+        .hero h1 {
+            font-size: 3.8rem;
+            font-weight: 800;
+            background: linear-gradient(145deg, #ffffff, #7dd3fc, #2dd4bf);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        .hero p {
+            max-width: 700px;
+            margin: 1.2rem auto;
+            color: #bac8e6;
+            font-size: 1.2rem;
+        }
+        .badge-cta {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: #1e2a3e;
+            padding: 0.6rem 1.8rem;
+            border-radius: 60px;
+            border-left: 3px solid #2dd4bf;
+            font-size: 0.9rem;
+            backdrop-filter: blur(4px);
+        }
+
+        /* categories grid enhanced */
+        .section-title {
+            font-size: 2.2rem;
+            font-weight: 700;
+            margin: 3rem 0 1.8rem 0;
+            text-align: center;
+            letter-spacing: -0.3px;
+        }
+        .section-title i {
+            color: #2dd4bf;
+            margin-right: 12px;
+            background: #1a2a3f;
+            padding: 8px;
+            border-radius: 50%;
+        }
+        .categories-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            max-width: 1400px;
+            margin: 0 auto 3rem;
+            padding: 0 1.8rem;
+        }
+        .category-card {
+            background: rgba(12, 18, 28, 0.75);
+            backdrop-filter: blur(8px);
+            border-radius: 2rem;
+            padding: 1.8rem;
+            border: 1px solid rgba(45, 212, 191, 0.25);
+            transition: all 0.3s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+            cursor: pointer;
+        }
+        .category-card:hover {
+            transform: translateY(-8px);
+            border-color: #2dd4bf;
+            box-shadow: 0 25px 35px -12px rgba(0, 210, 200, 0.25);
+            background: rgba(20, 28, 45, 0.85);
+        }
+        .card-icon {
+            font-size: 2.6rem;
+            color: #2dd4bf;
+            margin-bottom: 1rem;
+        }
+        .category-card h3 {
+            font-size: 1.6rem;
+            margin-bottom: 0.7rem;
+        }
+        .category-card p {
+            color: #b9c7e3;
+            font-size: 0.9rem;
+        }
+        .card-tag {
+            display: inline-block;
+            margin-top: 1rem;
+            font-size: 0.7rem;
+            background: #0f172a;
+            padding: 0.2rem 0.8rem;
+            border-radius: 30px;
+            color: #7dd3fc;
+            letter-spacing: 0.5px;
+        }
+
+        /* messenger + resource server - Enhanced */
+        .server-section {
+            background: linear-gradient(145deg, #070b16, #04070f);
+            border-top: 1px solid #2dd4bf30;
+            border-bottom: 1px solid #2dd4bf30;
+            padding: 3rem 1.5rem;
+        }
+        .server-grid {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 2rem;
+            justify-content: center;
+        }
+        .chat-panel {
+            flex: 2.2;
+            min-width: 300px;
+            background: #0a0f1ccc;
+            backdrop-filter: blur(12px);
+            border-radius: 2rem;
+            border: 1px solid #2dd4bf40;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            transition: all 0.2s;
+        }
+        .resources-panel {
+            flex: 1.5;
+            min-width: 280px;
+            background: #0a0f1ccc;
+            backdrop-filter: blur(12px);
+            border-radius: 2rem;
+            border: 1px solid #2dd4bf40;
+            padding: 1.2rem;
+            display: flex;
+            flex-direction: column;
+        }
+        .panel-header {
+            background: #10182b;
+            padding: 1rem 1.5rem;
+            border-bottom: 1px solid #2dd4bf60;
+            font-weight: 700;
+            font-size: 1.2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .panel-header i {
+            margin-right: 10px;
+            color: #2dd4bf;
+        }
+        .delete-actions {
+            display: flex;
+            gap: 12px;
+        }
+        .delete-btn {
+            background: rgba(255, 80, 80, 0.2);
+            border: 1px solid #ff6666;
+            color: #ffaaaa;
+            padding: 5px 12px;
+            border-radius: 50px;
+            font-size: 0.7rem;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+        .delete-btn:hover {
+            background: #ff5555;
+            color: white;
+            border-color: white;
+        }
+        .messages-area {
+            height: 360px;
+            overflow-y: auto;
+            padding: 1rem;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            background: #05080f;
+        }
+        .message-bubble {
+            background: #121a2c;
+            border-radius: 20px;
+            padding: 0.7rem 1rem;
+            max-width: 85%;
+            width: fit-content;
+            word-break: break-word;
+            position: relative;
+            transition: 0.1s;
+        }
+        .message-bubble.own {
+            align-self: flex-end;
+            background: #0f2a3f;
+            border-bottom-right-radius: 4px;
+        }
+        .message-bubble .msg-user {
+            font-weight: 700;
+            font-size: 0.75rem;
+            color: #7dd3fc;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .message-bubble .msg-text {
+            font-size: 0.9rem;
+            margin-top: 4px;
+        }
+        .msg-meta {
+            display: flex;
+            justify-content: flex-end;
+            gap: 10px;
+            margin-top: 6px;
+            font-size: 0.65rem;
+            color: #6a7c9e;
+        }
+        .delete-msg {
+            background: none;
+            border: none;
+            color: #ff8a8a;
+            cursor: pointer;
+            font-size: 0.7rem;
+            opacity: 0.6;
+        }
+        .delete-msg:hover {
+            opacity: 1;
+            text-decoration: underline;
+        }
+        .message-input-area {
+            display: flex;
+            padding: 1rem;
+            gap: 12px;
+            background: #0a1022;
+            border-top: 1px solid #2dd4bf30;
+        }
+        .message-input-area input {
+            flex: 1;
+            background: #141e32;
+            border: 1px solid #2a3f5e;
+            padding: 12px 18px;
+            border-radius: 60px;
+            color: white;
+            font-family: inherit;
+            outline: none;
+            transition: 0.2s;
+        }
+        .message-input-area input:focus {
+            border-color: #2dd4bf;
+        }
+        .message-input-area button {
+            background: #2dd4bf;
+            border: none;
+            padding: 0 1.6rem;
+            border-radius: 60px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.2s;
+            color: #0a0c12;
+        }
+        .resource-list {
+            list-style: none;
+            margin-top: 1rem;
+            flex-grow: 1;
+            overflow-y: auto;
+            max-height: 340px;
+        }
+        .resource-list li {
+            background: #0e1428;
+            margin: 0.8rem 0;
+            padding: 0.8rem 1rem;
+            border-radius: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            border-left: 4px solid #2dd4bf;
+            transition: 0.1s;
+        }
+        .stats-bar {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 12px;
+            font-size: 0.7rem;
+            color: #8f9fc7;
+        }
+        .username-set {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            background: #0a1022;
+            padding: 0.6rem 1rem;
+            border-radius: 60px;
+            margin: 8px 12px;
+        }
+        .username-set input {
+            background: #1f2a44;
+            border: none;
+            padding: 6px 14px;
+            border-radius: 40px;
+            color: white;
+        }
+        .username-set button {
+            background: #2dd4bf20;
+            border: 1px solid #2dd4bf;
+            border-radius: 40px;
+            padding: 5px 14px;
+            color: #2dd4bf;
+            cursor: pointer;
+        }
+        footer {
+            text-align: center;
+            padding: 2rem;
+            font-size: 0.8rem;
+            color: #5f6e8f;
+        }
+        .ping-indicator {
+            display: inline-block;
+            width: 8px;
+            height: 8px;
+            background: #2dd4bf;
+            border-radius: 50%;
+            box-shadow: 0 0 8px cyan;
+            margin-left: 8px;
+            animation: pulse 1.5s infinite;
+        }
+        @keyframes pulse {
+            0% { opacity: 0.4; transform: scale(0.8);}
+            100% { opacity: 1; transform: scale(1.2);}
+        }
+        @media (max-width: 700px) {
+            .navbar { flex-direction: column; gap: 12px; }
+            .hero h1 { font-size: 2.2rem; }
+        }
+    </style>
+</head>
+<body>
+
+<nav class="navbar">
+    <div class="logo"><i class="fas fa-brain"></i> AIAC CTF TRAINING</div>
+    <div class="nav-links">
+        <a href="#categories"><i class="fas fa-cubes"></i> Domains</a>
+        <a href="#server-hub"><i class="fas fa-comments"></i> WarRoom</a>
+        <a href="#resources"><i class="fas fa-folder-tree"></i> Vault</a>
+    </div>
+</nav>
+
+<header class="hero">
+    <h1>AIAC <span class="glow-text">Capture The Flag</span> • Elite Training</h1>
+    <p>Master every CTF category — Cryptography, Pwn, Web, Forensics, Reversing, Cloud. Real-time tactical chat + shared resource vault with full moderation.</p>
+    <div class="badge-cta"><i class="fas fa-shield-haltered"></i> 8+ pro categories | Encrypted chat vibe | Dynamic resource sharing</div>
+</header>
+
+<!-- Categories section -->
+<div class="section-title" id="categories"><i class="fas fa-crown"></i> CTF Battle Categories</div>
+<div class="categories-container">
+    <div class="category-card"><div class="card-icon"><i class="fas fa-lock"></i></div><h3>Cryptography</h3><p>RSA, AES, hashes, classic ciphers, side-channel.</p><div class="card-tag">#crypto</div></div>
+    <div class="category-card"><div class="card-icon"><i class="fas fa-globe"></i></div><h3>Web Exploitation</h3><p>SQLi, XSS, SSTI, JWT, GraphQL, SSRF.</p><div class="card-tag">#web</div></div>
+    <div class="category-card"><div class="card-icon"><i class="fas fa-microchip"></i></div><h3>Binary Exploitation</h3><p>ROP, heap, format strings, shellcoding.</p><div class="card-tag">#pwn</div></div>
+    <div class="category-card"><div class="card-icon"><i class="fas fa-search"></i></div><h3>Forensics</h3><p>PCAP, memory forensics, stego, artifacts.</p><div class="card-tag">#forensics</div></div>
+    <div class="category-card"><div class="card-icon"><i class="fas fa-network-wired"></i></div><h3>Networking</h3><p>Packet dissection, protocols, OSINT.</p><div class="card-tag">#net</div></div>
+    <div class="category-card"><div class="card-icon"><i class="fas fa-mobile-alt"></i></div><h3>Reverse Engineering</h3><p>Assembly, decompilers, anti-debug.</p><div class="card-tag">#reversing</div></div>
+    <div class="category-card"><div class="card-icon"><i class="fas fa-database"></i></div><h3>Misc & Stego</h3><p>Hidden data, encoding, quantum.</p><div class="card-tag">#misc</div></div>
+    <div class="category-card"><div class="card-icon"><i class="fas fa-cloud-upload-alt"></i></div><h3>Cloud & DevSecOps</h3><p>IAM misconfig, container escape.</p><div class="card-tag">#cloud</div></div>
+</div>
+
+<!-- MESSAGING + RESOURCE SERVER (Enhanced) -->
+<div class="server-section" id="server-hub">
+    <div class="section-title" style="margin-top:0;"><i class="fas fa-comments"></i> WarRoom • Live Ops & Intel Exchange</div>
+    <div class="server-grid">
+        <!-- CHAT PANEL with message deletion -->
+        <div class="chat-panel">
+            <div class="panel-header">
+                <span><i class="fas fa-comment-dots"></i> tactical chat <span class="ping-indicator"></span></span>
+                <div class="delete-actions">
+                    <button id="deleteAllMessagesBtn" class="delete-btn"><i class="fas fa-trash-alt"></i> Clear ALL</button>
+                </div>
+            </div>
+            <div class="messages-area" id="messagesContainer"></div>
+            <div class="username-set">
+                <span><i class="fas fa-user-ninja"></i> Operator Alias:</span>
+                <input type="text" id="usernameInput" placeholder="HackerTag" maxlength="20" value="AIAC_Operator">
+                <button id="setUsernameBtn"><i class="fas fa-user-check"></i> set</button>
+            </div>
+            <div class="message-input-area">
+                <input type="text" id="messageInput" placeholder="Type your message... (share intel, ask hints)">
+                <button id="sendMsgBtn"><i class="fas fa-paper-plane"></i> Send</button>
+            </div>
+        </div>
+
+        <!-- RESOURCES PANEL enhanced with better interaction -->
+        <div class="resources-panel" id="resources">
+            <div class="panel-header"><i class="fas fa-folder-open"></i> Shared Resource Vault <i class="fas fa-share-alt" style="font-size:0.9rem;"></i></div>
+            <ul class="resource-list" id="resourceList"></ul>
+            <div class="add-resource" style="display: flex; gap: 8px; margin-top: 12px;">
+                <input type="text" id="newResourceName" placeholder="Name or URL (e.g., https://exploit.ed) 🔗" style="flex:1; background:#141e32; border:none; padding:10px; border-radius:40px; color:white;">
+                <button id="addResourceBtn" style="background:#2dd4bf; border:none; border-radius:40px; padding:0 16px; font-weight:bold;"><i class="fas fa-plus"></i> Share</button>
+            </div>
+            <div class="stats-bar">
+                <span><i class="fas fa-database"></i> <span id="resourceCount">0</span> resources</span>
+                <span><i class="fas fa-comment"></i> <span id="messageCount">0</span> intel msgs</span>
+            </div>
+        </div>
+    </div>
+</div>
+
+<footer>
+    <i class="fas fa-skull-crossbones"></i> AIAC CTF TRAINING — real-time collaboration, full message control, shared knowledge base. Train like an elite.
+</footer>
+
+<script>
+    // ---- Enhanced CTF Server with Delete capabilities ----
+    let currentUser = localStorage.getItem('aiac_chat_username') || 'AIAC_Operator';
+    let chatMessages = [];
+    let resourcesArray = [];
+
+    // DOM elements
+    const messagesContainer = document.getElementById('messagesContainer');
+    const usernameInput = document.getElementById('usernameInput');
+    const setUsernameBtn = document.getElementById('setUsernameBtn');
+    const messageInput = document.getElementById('messageInput');
+    const sendBtn = document.getElementById('sendMsgBtn');
+    const resourceListEl = document.getElementById('resourceList');
+    const newResourceName = document.getElementById('newResourceName');
+    const addResourceBtn = document.getElementById('addResourceBtn');
+    const deleteAllMessagesBtn = document.getElementById('deleteAllMessagesBtn');
+    const resourceCountSpan = document.getElementById('resourceCount');
+    const messageCountSpan = document.getElementById('messageCount');
+
+    // Helper: update stats
+    function updateStats() {
+        if(resourceCountSpan) resourceCountSpan.innerText = resourcesArray.length;
+        if(messageCountSpan) messageCountSpan.innerText = chatMessages.length;
+    }
+
+    // Load/Save
+    function loadFromStorage() {
+        const storedMessages = localStorage.getItem('aiac_chat_messages');
+        if(storedMessages) {
+            chatMessages = JSON.parse(storedMessages);
+        } else {
+            chatMessages = [
+                { id: 'sys1', user: "🛡️ SYSTEM", text: "Welcome to AIAC CTF Training! You can delete any message or clear chat. Share resources, collaborate!", timestamp: Date.now() },
+                { id: 'sys2', user: "Mentor", text: "Tip: Use the resource vault to upload cheatsheets & writeups.", timestamp: Date.now() - 100000 }
+            ];
+            saveMessagesToStorage();
+        }
+        const storedResources = localStorage.getItem('aiac_resources');
+        if(storedResources) {
+            resourcesArray = JSON.parse(storedResources);
+        } else {
+            resourcesArray = [
+                { id: "r1", name: "📚 CTF 101 Official Guide", url: "https://ctf101.org/" },
+                { id: "r2", name: "🛠️ Ghidra RE Suite", url: "https://ghidra-sre.org/" },
+                { id: "r3", name: "⚡ Pwntools Mastery", url: "https://docs.pwntools.com/" },
+                { id: "r4", name: "🔍 CyberChef Toolbox", url: "https://gchq.github.io/CyberChef/" }
+            ];
+            saveResourcesToStorage();
+        }
+    }
+
+    function saveMessagesToStorage() {
+        localStorage.setItem('aiac_chat_messages', JSON.stringify(chatMessages));
+        updateStats();
+    }
+    function saveResourcesToStorage() {
+        localStorage.setItem('aiac_resources', JSON.stringify(resourcesArray));
+        updateStats();
+    }
+
+    // Generate unique ID for messages
+    function generateId() { return Date.now() + '-' + Math.random().toString(36).substr(2, 6); }
+
+    function renderMessages() {
+        if(!messagesContainer) return;
+        messagesContainer.innerHTML = '';
+        const msgsToShow = chatMessages.slice(-80);
+        msgsToShow.forEach(msg => {
+            const bubble = document.createElement('div');
+            bubble.className = 'message-bubble';
+            if(msg.user === currentUser) bubble.classList.add('own');
+            const userSpan = document.createElement('div');
+            userSpan.className = 'msg-user';
+            userSpan.innerHTML = `<i class="fas fa-user-astronaut"></i> ${escapeHtml(msg.user)}`;
+            const textSpan = document.createElement('div');
+            textSpan.className = 'msg-text';
+            textSpan.innerText = msg.text;
+            const metaSpan = document.createElement('div');
+            metaSpan.className = 'msg-meta';
+            const timeStr = new Date(msg.timestamp).toLocaleTimeString([], {hour:'2-digit', minute:'2-digit'});
+            const deleteBtn = document.createElement('button');
+            deleteBtn.innerHTML = '<i class="fas fa-trash-can"></i> delete';
+            deleteBtn.className = 'delete-msg';
+            deleteBtn.onclick = (e) => {
+                e.stopPropagation();
+                deleteSingleMessage(msg.id);
+            };
+            metaSpan.innerHTML = `<span>${timeStr}</span>`;
+            metaSpan.appendChild(deleteBtn);
+            bubble.appendChild(userSpan);
+            bubble.appendChild(textSpan);
+            bubble.appendChild(metaSpan);
+            messagesContainer.appendChild(bubble);
+        });
+        messagesContainer.scrollTop = messagesContainer.scrollHeight;
+        updateStats();
+    }
+
+    function deleteSingleMessage(messageId) {
+        chatMessages = chatMessages.filter(m => m.id !== messageId);
+        saveMessagesToStorage();
+        renderMessages();
+        triggerStorageEvent('chat_deleted');
+    }
+
+    function deleteAllMessages() {
+        if(confirm("⚠️ Delete ALL chat messages? This action is permanent for all users.")) {
+            chatMessages = [];
+            // add system notification
+            chatMessages.push({ id: generateId(), user: "🛡️ SYSTEM", text: "Chat history cleared by moderator.", timestamp: Date.now() });
+            saveMessagesToStorage();
+            renderMessages();
+            triggerStorageEvent('chat_cleared');
+        }
+    }
+
+    function renderResources() {
+        if(!resourceListEl) return;
+        resourceListEl.innerHTML = '';
+        if(resourcesArray.length === 0) {
+            resourceListEl.innerHTML = '<li><i class="fas fa-info-circle"></i> No resources yet. Add tools or writeups.</li>';
+            updateStats();
+            return;
+        }
+        resourcesArray.forEach(res => {
+            const li = document.createElement('li');
+            const icon = document.createElement('i');
+            icon.className = 'fas fa-link';
+            const link = document.createElement('a');
+            link.className = 'resource-link';
+            let urlToUse = res.url;
+            if (res.url && !res.url.startsWith('http://') && !res.url.startsWith('https://') && res.url !== '#') {
+                urlToUse = 'https://' + res.url;
+            }
+            link.href = urlToUse;
+            link.target = '_blank';
+            link.innerText = res.name;
+            const delBtn = document.createElement('button');
+            delBtn.innerHTML = '<i class="fas fa-trash-alt"></i>';
+            delBtn.style.background = 'transparent';
+            delBtn.style.border = 'none';
+            delBtn.style.color = '#ff8c8c';
+            delBtn.style.cursor = 'pointer';
+            delBtn.style.marginLeft = '8px';
+            delBtn.onclick = () => removeResourceById(res.id);
+            li.appendChild(icon);
+            li.appendChild(link);
+            li.appendChild(delBtn);
+            resourceListEl.appendChild(li);
+        });
+        updateStats();
+    }
+
+    function removeResourceById(id) {
+        resourcesArray = resourcesArray.filter(r => r.id !== id);
+        saveResourcesToStorage();
+        renderResources();
+        triggerStorageEvent('resources_updated');
+        addChatMessage("📌 SYSTEM", `A resource was removed from vault.`, false);
+    }
+
+    function addResource(nameInputRaw) {
+        let raw = nameInputRaw.trim();
+        if(raw === "") return false;
+        let resourceName = raw.length > 50 ? raw.substring(0,47)+"..." : raw;
+        let resourceUrl = "#";
+        if(raw.match(/^(http|https):\/\//i)) {
+            resourceUrl = raw;
+            resourceName = raw.length > 45 ? raw.substring(0,42)+"..." : raw;
+        } else if(raw.includes("http://") || raw.includes("https://")) {
+            const urlMatch = raw.match(/(https?:\/\/[^\s]+)/i);
+            if(urlMatch) { resourceUrl = urlMatch[0]; resourceName = raw.replace(urlMatch[0], '').trim() || "Shared Link"; }
+        }
+        const newId = 'res_' + Date.now() + '_' + Math.floor(Math.random()*10000);
+        resourcesArray.push({ id: newId, name: resourceName, url: resourceUrl });
+        saveResourcesToStorage();
+        renderResources();
+        addChatMessage("📌 SYSTEM", `New shared resource: ${resourceName}`, false);
+        triggerStorageEvent('resources_updated');
+        return true;
+    }
+
+    function addChatMessage(user, text, isUserAction = true) {
+        if(!text.trim()) return;
+        const newMsg = { id: generateId(), user: user, text: text.trim(), timestamp: Date.now() };
+        chatMessages.push(newMsg);
+        if(chatMessages.length > 250) chatMessages = chatMessages.slice(-250);
+        saveMessagesToStorage();
+        renderMessages();
+        triggerStorageEvent('chat_updated');
+    }
+
+    function setUsername(newName) {
+        if(!newName.trim()) return;
+        const oldName = currentUser;
+        currentUser = newName.trim().substring(0, 20);
+        localStorage.setItem('aiac_chat_username', currentUser);
+        usernameInput.value = currentUser;
+        addChatMessage("🛡️ SYSTEM", `${oldName} → now known as ${currentUser}`, false);
+    }
+
+    function sendMessage() {
+        const msg = messageInput.value.trim();
+        if(msg === "") return;
+        addChatMessage(currentUser, msg);
+        messageInput.value = "";
+        messageInput.focus();
+    }
+
+    function triggerStorageEvent(type) {
+        localStorage.setItem('aiac_sync_trigger', JSON.stringify({ type, time: Date.now() }));
+        setTimeout(() => { if(localStorage.getItem('aiac_sync_trigger')) localStorage.removeItem('aiac_sync_trigger'); }, 50);
+    }
+
+    window.addEventListener('storage', (e) => {
+        if(e.key === 'aiac_chat_messages') {
+            const newMessages = localStorage.getItem('aiac_chat_messages');
+            if(newMessages) { chatMessages = JSON.parse(newMessages); renderMessages(); }
+        } else if(e.key === 'aiac_resources') {
+            const newResources = localStorage.getItem('aiac_resources');
+            if(newResources) { resourcesArray = JSON.parse(newResources); renderResources(); }
+        } else if(e.key === 'aiac_sync_trigger') {
+            const storedMessages = localStorage.getItem('aiac_chat_messages');
+            if(storedMessages) chatMessages = JSON.parse(storedMessages);
+            const storedRes = localStorage.getItem('aiac_resources');
+            if(storedRes) resourcesArray = JSON.parse(storedRes);
+            renderMessages(); renderResources();
+        }
+    });
+
+    function init() {
+        loadFromStorage();
+        usernameInput.value = currentUser;
+        renderMessages();
+        renderResources();
+        setUsernameBtn.addEventListener('click', () => setUsername(usernameInput.value));
+        sendBtn.addEventListener('click', sendMessage);
+        messageInput.addEventListener('keypress', (e) => { if(e.key === 'Enter') sendMessage(); });
+        addResourceBtn.addEventListener('click', () => {
+            const raw = newResourceName.value.trim();
+            if(raw) { addResource(raw); newResourceName.value = ''; }
+            else addChatMessage("⚠️ HINT", "Enter a resource name or valid URL.", false);
+        });
+        newResourceName.addEventListener('keypress', (e) => { if(e.key === 'Enter') addResourceBtn.click(); });
+        deleteAllMessagesBtn.addEventListener('click', deleteAllMessages);
+        if(!localStorage.getItem('aiac_chat_username')) {
+            setTimeout(() => addChatMessage("🛡️ SYSTEM", "Set your alias and start collaborating!", false), 500);
+        }
+    }
+    function escapeHtml(str) { return str.replace(/[&<>]/g, function(m) { if(m==='&') return '&amp;'; if(m==='<') return '&lt;'; if(m==='>') return '&gt;'; return m;}); }
+    init();
+</script>
+</body>
+</html>
