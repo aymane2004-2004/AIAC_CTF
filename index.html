@@ -329,7 +329,95 @@
         .resource-card a { color: #cbd5ff; text-decoration: none; display: flex; align-items: center; gap: 12px; font-weight: 500; }
         .resource-card a i { color: #2dd4bf; font-size: 1.2rem; }
 
-        footer { text-align: center; padding: 2.5rem; font-size: 0.85rem; color: #6a7c9e; margin-top: 2rem; border-top: 1px solid rgba(45, 212, 191, 0.2); }
+        /* Footer with Contact Info */
+        footer {
+            background: linear-gradient(145deg, #070b14, #03050a);
+            margin-top: 3rem;
+            border-top: 1px solid rgba(45, 212, 191, 0.2);
+        }
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2.5rem 1.8rem;
+        }
+        .contact-grid {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            background: rgba(12, 18, 28, 0.6);
+            padding: 0.8rem 1.5rem;
+            border-radius: 60px;
+            backdrop-filter: blur(4px);
+            border: 1px solid rgba(45, 212, 191, 0.2);
+            transition: all 0.2s;
+        }
+        .contact-item:hover {
+            border-color: #2dd4bf;
+            background: rgba(20, 28, 50, 0.8);
+            transform: translateY(-2px);
+        }
+        .contact-item i {
+            font-size: 1.3rem;
+            color: #2dd4bf;
+        }
+        .contact-item a, .contact-item span {
+            color: #eef5ff;
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+        .contact-item a:hover {
+            color: #2dd4bf;
+        }
+        .social-icons {
+            display: flex;
+            justify-content: center;
+            gap: 1.2rem;
+            margin: 1.5rem 0;
+        }
+        .social-icon {
+            background: rgba(12, 18, 28, 0.6);
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s;
+            border: 1px solid rgba(45, 212, 191, 0.2);
+        }
+        .social-icon i {
+            font-size: 1.3rem;
+            color: #cbd5ff;
+        }
+        .social-icon:hover {
+            border-color: #2dd4bf;
+            transform: translateY(-3px);
+        }
+        .social-icon:hover i {
+            color: #2dd4bf;
+        }
+        .footer-divider {
+            height: 1px;
+            background: linear-gradient(90deg, transparent, #2dd4bf, transparent);
+            margin: 1.5rem auto;
+            width: 80%;
+        }
+        .footer-text {
+            text-align: center;
+            font-size: 0.8rem;
+            color: #6a7c9e;
+        }
+        .footer-text p {
+            margin: 0.5rem 0;
+        }
         
         @media (max-width: 768px) {
             .navbar { flex-direction: column; gap: 15px; padding: 1rem; }
@@ -337,6 +425,8 @@
             .section-title { font-size: 1.8rem; }
             .wiki-header h2 { font-size: 1.3rem; }
             .wiki-content { padding: 1.2rem; }
+            .contact-item { padding: 0.5rem 1rem; font-size: 0.8rem; }
+            .contact-item a, .contact-item span { font-size: 0.75rem; }
         }
     </style>
 </head>
@@ -601,23 +691,42 @@
     <div class="resource-card"><a href="https://regex101.com/" target="_blank"><i class="fas fa-code"></i> Regex101 — Real-time regex debugger</a></div>
 </div>
 
+<!-- ========= FOOTER WITH CONTACT INFO (WhatsApp, Email, Discord) ========= -->
 <footer>
-    <div style="display: flex; flex-direction: column; align-items: center; gap: 1rem;">
-        <div style="display: flex; gap: 2rem; justify-content: center; flex-wrap: wrap;">
-            <span style="color: #7dd3fc; font-size: 0.8rem;"><i class="fas fa-book"></i> CTF Library v2.0</span>
-            <span style="color: #5f6e8f; font-size: 0.8rem;"><i class="fas fa-users"></i> Community Resource</span>
-            <span style="color: #5f6e8f; font-size: 0.8rem;"><i class="fas fa-laptop-code"></i> Educational Purpose Only</span>
+    <div class="footer-content">
+        <div class="contact-grid">
+            <div class="contact-item">
+                <i class="fab fa-whatsapp"></i>
+                <a href="https://wa.me/212708311489" target="_blank">+212 7 08 31 14 89</a>
+            </div>
+            <div class="contact-item">
+                <i class="fas fa-envelope"></i>
+                <a href="mailto:chaouqi.aymane@aiac.ma">chaouqi.aymane@aiac.ma</a>
+            </div>
+            <div class="contact-item">
+                <i class="fab fa-discord"></i>
+                <a href="https://discord.gg/77fUfnKf" target="_blank">Join our Discord Server</a>
+            </div>
         </div>
-        <div style="border-top: 1px solid rgba(45, 212, 191, 0.15); width: 80%; max-width: 500px;"></div>
-        <p style="font-size: 0.8rem; color: #8f9fc7; max-width: 650px; margin: 0 auto; line-height: 1.5;">
-            All techniques and examples are for educational purposes to improve cybersecurity awareness.
-            Practice ethically and respect applicable laws.
-        </p>
-        <p style="font-size: 0.7rem; color: #5f6e8f;">
-            <i class="fas fa-flag-checkered"></i> Free forever · No registration · No tracking
-        </p>
+        
+        <div class="social-icons">
+            <a href="https://wa.me/212708311489" target="_blank" class="social-icon"><i class="fab fa-whatsapp"></i></a>
+            <a href="mailto:chaouqi.aymane@aiac.ma" class="social-icon"><i class="fas fa-envelope"></i></a>
+            <a href="https://discord.gg/77fUfnKf" target="_blank" class="social-icon"><i class="fab fa-discord"></i></a>
+            <a href="https://github.com/aymane2004-2004" target="_blank" class="social-icon"><i class="fab fa-github"></i></a>
+        </div>
+        
+        <div class="footer-divider"></div>
+        
+        <div class="footer-text">
+            <p><i class="fas fa-flag-checkered"></i> AIAC CTF WIKIPEDIA — Community-driven training library for Capture The Flag enthusiasts</p>
+            <p>All techniques and examples are for educational purposes to improve cybersecurity awareness. Practice ethically.</p>
+            <p style="margin-top: 0.8rem;">🔓 100% free · No tracking · No registration · Open knowledge</p>
+            <p style="margin-top: 0.5rem; font-size: 0.7rem;">© 2025 AIAC CTF Community — Learn, train, capture flags</p>
+        </div>
     </div>
 </footer>
+
 <script>
     document.querySelectorAll('.nav-links a, .mini-card').forEach(el => {
         el.addEventListener('click', function(e) {
@@ -633,7 +742,7 @@
             }
         });
     });
-    console.log("AIAC CTF WIKIPEDIA — Enhanced verbose training library loaded.");
+    console.log("AIAC CTF WIKIPEDIA — Enhanced training library with contact info loaded.");
 </script>
 </body>
 </html>
