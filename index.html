@@ -8,6 +8,8 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <!-- Google Fonts: modern & clean -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,600;14..32,700;14..32,800&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Socket.IO client -->
+    <script src="https://cdn.socket.io/4.5.4/socket.io.min.js"></script>
     <style>
         * {
             margin: 0;
@@ -121,6 +123,17 @@
             font-size: 0.9rem;
             backdrop-filter: blur(4px);
         }
+        .connection-status {
+            display: inline-block;
+            margin-left: 12px;
+            font-size: 0.8rem;
+            padding: 4px 10px;
+            border-radius: 20px;
+            background: #1e2a3e;
+        }
+        .status-connected { color: #2dd4bf; }
+        .status-disconnected { color: #ff6666; }
+        .status-connecting { color: #ffaa44; }
 
         /* categories grid enhanced */
         .section-title {
@@ -342,6 +355,10 @@
             transition: 0.2s;
             color: #0a0c12;
         }
+        .message-input-area button:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
         .resource-list {
             list-style: none;
             margin-top: 1rem;
@@ -401,11 +418,15 @@
             display: inline-block;
             width: 8px;
             height: 8px;
-            background: #2dd4bf;
+            background: #ffaa44;
             border-radius: 50%;
-            box-shadow: 0 0 8px cyan;
+            box-shadow: 0 0 8px #ffaa44;
             margin-left: 8px;
             animation: pulse 1.5s infinite;
+        }
+        .ping-indicator.connected {
+            background: #2dd4bf;
+            box-shadow: 0 0 8px #2dd4bf;
         }
         @keyframes pulse {
             0% { opacity: 0.4; transform: scale(0.8);}
@@ -431,7 +452,10 @@
 <header class="hero">
     <h1>AIAC <span class="glow-text">Capture The Flag</span> • Elite Training</h1>
     <p>Master every CTF category — Cryptography, Pwn, Web, Forensics, Reversing, Cloud. Real-time tactical chat + shared resource vault with full moderation.</p>
-    <div class="badge-cta"><i class="fas fa-shield-haltered"></i> 8+ pro categories | Encrypted chat vibe | Dynamic resource sharing</div>
+    <div class="badge-cta">
+        <i class="fas fa-shield-haltered"></i> 8+ pro categories | Real-time chat | Global sync
+        <span id="connectionStatus" class="connection-status status-connecting">● Connecting to server...</span>
+    </div>
 </header>
 
 <!-- Categories section -->
@@ -454,34 +478,41 @@
         <!-- CHAT PANEL with message deletion -->
         <div class="chat-panel">
             <div class="panel-header">
-                <span><i class="fas fa-comment-dots"></i> tactical chat <span class="ping-indicator"></span></span>
+                <span><i class="fas fa-comment-dots"></i> tactical chat <span class="ping-indicator" id="pingIndicator"></span></span>
                 <div class="delete-actions">
                     <button id="deleteAllMessagesBtn" class="delete-btn"><i class="fas fa-trash-alt"></i> Clear ALL</button>
                 </div>
             </div>
-            <div class="messages-area" id="messagesContainer"></div>
+            <div class="messages-area" id="messagesContainer">
+                <div style="text-align:center; padding:2rem; color:#6a7c9e;">
+                    <i class="fas fa-spinner fa-pulse"></i> Connecting to global chat...
+                </div>
+            </div>
             <div class="username-set">
                 <span><i class="fas fa-user-ninja"></i> Operator Alias:</span>
                 <input type="text" id="usernameInput" placeholder="HackerTag" maxlength="20" value="AIAC_Operator">
                 <button id="setUsernameBtn"><i class="fas fa-user-check"></i> set</button>
             </div>
             <div class="message-input-area">
-                <input type="text" id="messageInput" placeholder="Type your message... (share intel, ask hints)">
-                <button id="sendMsgBtn"><i class="fas fa-paper-plane"></i> Send</button>
+                <input type="text" id="messageInput" placeholder="Type your message... (share intel, ask hints)" disabled>
+                <button id="sendMsgBtn" disabled><i class="fas fa-paper-plane"></i> Send</button>
             </div>
         </div>
 
         <!-- RESOURCES PANEL enhanced with better interaction -->
         <div class="resources-panel" id="resources">
             <div class="panel-header"><i class="fas fa-folder-open"></i> Shared Resource Vault <i class="fas fa-share-alt" style="font-size:0.9rem;"></i></div>
-            <ul class="resource-list" id="resourceList"></ul>
+            <ul class="resource-list" id="resourceList">
+                <li><i class="fas fa-spinner fa-pulse"></i> Loading resources...</li>
+            </ul>
             <div class="add-resource" style="display: flex; gap: 8px; margin-top: 12px;">
-                <input type="text" id="newResourceName" placeholder="Name or URL (e.g., https://exploit.ed) 🔗" style="flex:1; background:#141e32; border:none; padding:10px; border-radius:40px; color:white;">
-                <button id="addResourceBtn" style="background:#2dd4bf; border:none; border-radius:40px; padding:0 16px; font-weight:bold;"><i class="fas fa-plus"></i> Share</button>
+                <input type="text" id="newResourceName" placeholder="Name or URL (e.g., https://exploit.ed) 🔗" style="flex:1; background:#141e32; border:none; padding:10px; border-radius:40px; color:white;" disabled>
+                <button id="addResourceBtn" style="background:#2dd4bf; border:none; border-radius:40px; padding:0 16px; font-weight:bold;" disabled><i class="fas fa-plus"></i> Share</button>
             </div>
             <div class="stats-bar">
                 <span><i class="fas fa-database"></i> <span id="resourceCount">0</span> resources</span>
                 <span><i class="fas fa-comment"></i> <span id="messageCount">0</span> intel msgs</span>
+                <span><i class="fas fa-users"></i> <span id="userCount">0</span> online</span>
             </div>
         </div>
     </div>
@@ -492,10 +523,16 @@
 </footer>
 
 <script>
-    // ---- Enhanced CTF Server with Delete capabilities ----
+    // ============================================
+    // BACKEND URL - YOUR SNAPDEPLOY DEPLOYMENT
+    // ============================================
+    const BACKEND_URL = 'https://node-express-app-43a7646e.containers.snapdeploy.dev';
+    
+    let socket = null;
     let currentUser = localStorage.getItem('aiac_chat_username') || 'AIAC_Operator';
     let chatMessages = [];
     let resourcesArray = [];
+    let isConnected = false;
 
     // DOM elements
     const messagesContainer = document.getElementById('messagesContainer');
@@ -509,6 +546,9 @@
     const deleteAllMessagesBtn = document.getElementById('deleteAllMessagesBtn');
     const resourceCountSpan = document.getElementById('resourceCount');
     const messageCountSpan = document.getElementById('messageCount');
+    const userCountSpan = document.getElementById('userCount');
+    const connectionStatusSpan = document.getElementById('connectionStatus');
+    const pingIndicator = document.getElementById('pingIndicator');
 
     // Helper: update stats
     function updateStats() {
@@ -516,58 +556,122 @@
         if(messageCountSpan) messageCountSpan.innerText = chatMessages.length;
     }
 
-    // Load/Save
-    function loadFromStorage() {
-        const storedMessages = localStorage.getItem('aiac_chat_messages');
-        if(storedMessages) {
-            chatMessages = JSON.parse(storedMessages);
-        } else {
-            chatMessages = [
-                { id: 'sys1', user: "🛡️ SYSTEM", text: "Welcome to AIAC CTF Training! You can delete any message or clear chat. Share resources, collaborate!", timestamp: Date.now() },
-                { id: 'sys2', user: "Mentor", text: "Tip: Use the resource vault to upload cheatsheets & writeups.", timestamp: Date.now() - 100000 }
-            ];
-            saveMessagesToStorage();
+    // Enable/disable UI based on connection
+    function setUIEnabled(enabled) {
+        messageInput.disabled = !enabled;
+        sendBtn.disabled = !enabled;
+        newResourceName.disabled = !enabled;
+        addResourceBtn.disabled = !enabled;
+    }
+
+    // Update connection status display
+    function updateConnectionStatus(status, message) {
+        if (connectionStatusSpan) {
+            connectionStatusSpan.textContent = message;
+            connectionStatusSpan.className = `connection-status status-${status}`;
         }
-        const storedResources = localStorage.getItem('aiac_resources');
-        if(storedResources) {
-            resourcesArray = JSON.parse(storedResources);
-        } else {
-            resourcesArray = [
-                { id: "r1", name: "📚 CTF 101 Official Guide", url: "https://ctf101.org/" },
-                { id: "r2", name: "🛠️ Ghidra RE Suite", url: "https://ghidra-sre.org/" },
-                { id: "r3", name: "⚡ Pwntools Mastery", url: "https://docs.pwntools.com/" },
-                { id: "r4", name: "🔍 CyberChef Toolbox", url: "https://gchq.github.io/CyberChef/" }
-            ];
-            saveResourcesToStorage();
+        if (pingIndicator) {
+            if (status === 'connected') {
+                pingIndicator.classList.add('connected');
+            } else {
+                pingIndicator.classList.remove('connected');
+            }
         }
     }
 
-    function saveMessagesToStorage() {
-        localStorage.setItem('aiac_chat_messages', JSON.stringify(chatMessages));
-        updateStats();
+    // Connect to backend server
+    function connectToServer() {
+        updateConnectionStatus('connecting', '● Connecting to global server...');
+        setUIEnabled(false);
+        
+        socket = io(BACKEND_URL, {
+            transports: ['websocket', 'polling'],
+            reconnection: true,
+            reconnectionAttempts: 10,
+            reconnectionDelay: 1000,
+            timeout: 10000
+        });
+        
+        socket.on('connect', () => {
+            console.log('✅ Connected to SnapDeploy backend');
+            isConnected = true;
+            updateConnectionStatus('connected', '● Connected to global server');
+            setUIEnabled(true);
+        });
+        
+        socket.on('disconnect', () => {
+            console.log('❌ Disconnected from server');
+            isConnected = false;
+            updateConnectionStatus('disconnected', '● Disconnected - reconnecting...');
+            setUIEnabled(false);
+        });
+        
+        socket.on('connect_error', (error) => {
+            console.error('Connection error:', error);
+            updateConnectionStatus('disconnected', '● Connection failed - retrying...');
+        });
+        
+        socket.on('initial_data', (data) => {
+            console.log('Received initial data:', data.messages?.length, 'messages,', data.resources?.length, 'resources');
+            chatMessages = data.messages || [];
+            resourcesArray = data.resources || [];
+            renderMessages();
+            renderResources();
+            updateStats();
+        });
+        
+        socket.on('new_message', (message) => {
+            chatMessages.push(message);
+            renderMessages();
+            updateStats();
+        });
+        
+        socket.on('messages_updated', (messages) => {
+            chatMessages = messages;
+            renderMessages();
+            updateStats();
+        });
+        
+        socket.on('new_resource', (resource) => {
+            resourcesArray.push(resource);
+            renderResources();
+            updateStats();
+        });
+        
+        socket.on('resources_updated', (resources) => {
+            resourcesArray = resources;
+            renderResources();
+            updateStats();
+        });
+        
+        socket.on('user_count', (count) => {
+            if (userCountSpan) userCountSpan.innerText = count;
+        });
     }
-    function saveResourcesToStorage() {
-        localStorage.setItem('aiac_resources', JSON.stringify(resourcesArray));
-        updateStats();
-    }
-
-    // Generate unique ID for messages
-    function generateId() { return Date.now() + '-' + Math.random().toString(36).substr(2, 6); }
 
     function renderMessages() {
         if(!messagesContainer) return;
+        
+        if (chatMessages.length === 0) {
+            messagesContainer.innerHTML = '<div style="text-align:center; padding:2rem; color:#6a7c9e;"><i class="fas fa-comments"></i> No messages yet. Be the first to chat!</div>';
+            return;
+        }
+        
         messagesContainer.innerHTML = '';
         const msgsToShow = chatMessages.slice(-80);
         msgsToShow.forEach(msg => {
             const bubble = document.createElement('div');
             bubble.className = 'message-bubble';
             if(msg.user === currentUser) bubble.classList.add('own');
+            
             const userSpan = document.createElement('div');
             userSpan.className = 'msg-user';
             userSpan.innerHTML = `<i class="fas fa-user-astronaut"></i> ${escapeHtml(msg.user)}`;
+            
             const textSpan = document.createElement('div');
             textSpan.className = 'msg-text';
             textSpan.innerText = msg.text;
+            
             const metaSpan = document.createElement('div');
             metaSpan.className = 'msg-meta';
             const timeStr = new Date(msg.timestamp).toLocaleTimeString([], {hour:'2-digit', minute:'2-digit'});
@@ -576,8 +680,11 @@
             deleteBtn.className = 'delete-msg';
             deleteBtn.onclick = (e) => {
                 e.stopPropagation();
-                deleteSingleMessage(msg.id);
+                if(socket && isConnected) {
+                    socket.emit('delete_message', msg.id);
+                }
             };
+            
             metaSpan.innerHTML = `<span>${timeStr}</span>`;
             metaSpan.appendChild(deleteBtn);
             bubble.appendChild(userSpan);
@@ -586,35 +693,17 @@
             messagesContainer.appendChild(bubble);
         });
         messagesContainer.scrollTop = messagesContainer.scrollHeight;
-        updateStats();
-    }
-
-    function deleteSingleMessage(messageId) {
-        chatMessages = chatMessages.filter(m => m.id !== messageId);
-        saveMessagesToStorage();
-        renderMessages();
-        triggerStorageEvent('chat_deleted');
-    }
-
-    function deleteAllMessages() {
-        if(confirm("⚠️ Delete ALL chat messages? This action is permanent for all users.")) {
-            chatMessages = [];
-            // add system notification
-            chatMessages.push({ id: generateId(), user: "🛡️ SYSTEM", text: "Chat history cleared by moderator.", timestamp: Date.now() });
-            saveMessagesToStorage();
-            renderMessages();
-            triggerStorageEvent('chat_cleared');
-        }
     }
 
     function renderResources() {
         if(!resourceListEl) return;
-        resourceListEl.innerHTML = '';
+        
         if(resourcesArray.length === 0) {
             resourceListEl.innerHTML = '<li><i class="fas fa-info-circle"></i> No resources yet. Add tools or writeups.</li>';
-            updateStats();
             return;
         }
+        
+        resourceListEl.innerHTML = '';
         resourcesArray.forEach(res => {
             const li = document.createElement('li');
             const icon = document.createElement('i');
@@ -627,6 +716,7 @@
             }
             link.href = urlToUse;
             link.target = '_blank';
+            link.rel = 'noopener noreferrer';
             link.innerText = res.name;
             const delBtn = document.createElement('button');
             delBtn.innerHTML = '<i class="fas fa-trash-alt"></i>';
@@ -635,113 +725,87 @@
             delBtn.style.color = '#ff8c8c';
             delBtn.style.cursor = 'pointer';
             delBtn.style.marginLeft = '8px';
-            delBtn.onclick = () => removeResourceById(res.id);
+            delBtn.onclick = () => {
+                if(socket && isConnected) {
+                    socket.emit('delete_resource', res.id);
+                }
+            };
             li.appendChild(icon);
             li.appendChild(link);
             li.appendChild(delBtn);
             resourceListEl.appendChild(li);
         });
-        updateStats();
-    }
-
-    function removeResourceById(id) {
-        resourcesArray = resourcesArray.filter(r => r.id !== id);
-        saveResourcesToStorage();
-        renderResources();
-        triggerStorageEvent('resources_updated');
-        addChatMessage("📌 SYSTEM", `A resource was removed from vault.`, false);
-    }
-
-    function addResource(nameInputRaw) {
-        let raw = nameInputRaw.trim();
-        if(raw === "") return false;
-        let resourceName = raw.length > 50 ? raw.substring(0,47)+"..." : raw;
-        let resourceUrl = "#";
-        if(raw.match(/^(http|https):\/\//i)) {
-            resourceUrl = raw;
-            resourceName = raw.length > 45 ? raw.substring(0,42)+"..." : raw;
-        } else if(raw.includes("http://") || raw.includes("https://")) {
-            const urlMatch = raw.match(/(https?:\/\/[^\s]+)/i);
-            if(urlMatch) { resourceUrl = urlMatch[0]; resourceName = raw.replace(urlMatch[0], '').trim() || "Shared Link"; }
-        }
-        const newId = 'res_' + Date.now() + '_' + Math.floor(Math.random()*10000);
-        resourcesArray.push({ id: newId, name: resourceName, url: resourceUrl });
-        saveResourcesToStorage();
-        renderResources();
-        addChatMessage("📌 SYSTEM", `New shared resource: ${resourceName}`, false);
-        triggerStorageEvent('resources_updated');
-        return true;
-    }
-
-    function addChatMessage(user, text, isUserAction = true) {
-        if(!text.trim()) return;
-        const newMsg = { id: generateId(), user: user, text: text.trim(), timestamp: Date.now() };
-        chatMessages.push(newMsg);
-        if(chatMessages.length > 250) chatMessages = chatMessages.slice(-250);
-        saveMessagesToStorage();
-        renderMessages();
-        triggerStorageEvent('chat_updated');
-    }
-
-    function setUsername(newName) {
-        if(!newName.trim()) return;
-        const oldName = currentUser;
-        currentUser = newName.trim().substring(0, 20);
-        localStorage.setItem('aiac_chat_username', currentUser);
-        usernameInput.value = currentUser;
-        addChatMessage("🛡️ SYSTEM", `${oldName} → now known as ${currentUser}`, false);
     }
 
     function sendMessage() {
         const msg = messageInput.value.trim();
-        if(msg === "") return;
-        addChatMessage(currentUser, msg);
+        if(msg === "" || !socket || !isConnected) return;
+        socket.emit('send_message', { user: currentUser, text: msg });
         messageInput.value = "";
         messageInput.focus();
     }
 
-    function triggerStorageEvent(type) {
-        localStorage.setItem('aiac_sync_trigger', JSON.stringify({ type, time: Date.now() }));
-        setTimeout(() => { if(localStorage.getItem('aiac_sync_trigger')) localStorage.removeItem('aiac_sync_trigger'); }, 50);
+    function addResource() {
+        const raw = newResourceName.value.trim();
+        if(raw === "" || !socket || !isConnected) return;
+        let name = raw;
+        let url = "#";
+        if(raw.match(/^(http|https):\/\//i)) {
+            url = raw;
+            name = raw.length > 40 ? raw.substring(0,37)+"..." : raw;
+        } else if(raw.includes("http://") || raw.includes("https://")) {
+            const urlMatch = raw.match(/(https?:\/\/[^\s]+)/i);
+            if(urlMatch) { 
+                url = urlMatch[0]; 
+                name = raw.replace(urlMatch[0], '').trim() || "Shared Link";
+            }
+        }
+        socket.emit('add_resource', { name: name, url: url });
+        newResourceName.value = "";
     }
 
-    window.addEventListener('storage', (e) => {
-        if(e.key === 'aiac_chat_messages') {
-            const newMessages = localStorage.getItem('aiac_chat_messages');
-            if(newMessages) { chatMessages = JSON.parse(newMessages); renderMessages(); }
-        } else if(e.key === 'aiac_resources') {
-            const newResources = localStorage.getItem('aiac_resources');
-            if(newResources) { resourcesArray = JSON.parse(newResources); renderResources(); }
-        } else if(e.key === 'aiac_sync_trigger') {
-            const storedMessages = localStorage.getItem('aiac_chat_messages');
-            if(storedMessages) chatMessages = JSON.parse(storedMessages);
-            const storedRes = localStorage.getItem('aiac_resources');
-            if(storedRes) resourcesArray = JSON.parse(storedRes);
-            renderMessages(); renderResources();
-        }
-    });
-
-    function init() {
-        loadFromStorage();
+    function setUsername() {
+        const newName = usernameInput.value.trim();
+        if(!newName) return;
+        const oldName = currentUser;
+        currentUser = newName.substring(0, 20);
+        localStorage.setItem('aiac_chat_username', currentUser);
         usernameInput.value = currentUser;
         renderMessages();
-        renderResources();
-        setUsernameBtn.addEventListener('click', () => setUsername(usernameInput.value));
-        sendBtn.addEventListener('click', sendMessage);
-        messageInput.addEventListener('keypress', (e) => { if(e.key === 'Enter') sendMessage(); });
-        addResourceBtn.addEventListener('click', () => {
-            const raw = newResourceName.value.trim();
-            if(raw) { addResource(raw); newResourceName.value = ''; }
-            else addChatMessage("⚠️ HINT", "Enter a resource name or valid URL.", false);
-        });
-        newResourceName.addEventListener('keypress', (e) => { if(e.key === 'Enter') addResourceBtn.click(); });
-        deleteAllMessagesBtn.addEventListener('click', deleteAllMessages);
-        if(!localStorage.getItem('aiac_chat_username')) {
-            setTimeout(() => addChatMessage("🛡️ SYSTEM", "Set your alias and start collaborating!", false), 500);
+        if(socket && isConnected && oldName !== currentUser) {
+            socket.emit('username_change', { oldName: oldName, newName: currentUser });
         }
     }
-    function escapeHtml(str) { return str.replace(/[&<>]/g, function(m) { if(m==='&') return '&amp;'; if(m==='<') return '&lt;'; if(m==='>') return '&gt;'; return m;}); }
-    init();
+
+    function clearAllMessages() {
+        if(confirm("⚠️ Delete ALL chat messages? This action is permanent for all users.")) {
+            if(socket && isConnected) {
+                socket.emit('clear_all_messages');
+            }
+        }
+    }
+
+    function escapeHtml(str) {
+        if (!str) return '';
+        return str.replace(/[&<>]/g, function(m) {
+            if(m === '&') return '&amp;';
+            if(m === '<') return '&lt;';
+            if(m === '>') return '&gt;';
+            return m;
+        });
+    }
+
+    // Initialize
+    usernameInput.value = currentUser;
+    connectToServer();
+    
+    // Event listeners
+    setUsernameBtn.addEventListener('click', setUsername);
+    sendBtn.addEventListener('click', sendMessage);
+    messageInput.addEventListener('keypress', (e) => { if(e.key === 'Enter') sendMessage(); });
+    addResourceBtn.addEventListener('click', addResource);
+    newResourceName.addEventListener('keypress', (e) => { if(e.key === 'Enter') addResource(); });
+    deleteAllMessagesBtn.addEventListener('click', clearAllMessages);
 </script>
 </body>
 </html>
