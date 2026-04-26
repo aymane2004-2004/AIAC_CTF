@@ -3,11 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-    <title>AIAC CTF WIKIPEDIA | The Ultimate Training Encyclopedia</title>
+    <title>AIAC CTF WIKIPEDIA | The Ultimate Capture The Flag Encyclopedia</title>
     <!-- Font Awesome 6 -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,600;14..32,700;14..32,800&family=Space+Grotesk:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&family=Space+Grotesk:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
         * {
             margin: 0;
@@ -17,258 +17,359 @@
 
         body {
             font-family: 'Space Grotesk', 'Inter', sans-serif;
-            background: radial-gradient(circle at 10% 20%, #0a0c18, #03050b);
+            background: radial-gradient(circle at 20% 30%, #0a0c18, #020408);
             color: #eef5ff;
             line-height: 1.5;
             scroll-behavior: smooth;
         }
 
-        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar { width: 8px; }
         ::-webkit-scrollbar-track { background: #0a0e1a; border-radius: 10px; }
         ::-webkit-scrollbar-thumb { background: #2dd4bf; border-radius: 10px; }
 
-        .glow-text { text-shadow: 0 0 12px rgba(0, 255, 255, 0.7); }
+        .glow-text { text-shadow: 0 0 15px rgba(45, 212, 191, 0.6); }
         
+        /* Enhanced Navbar */
         .navbar {
-            backdrop-filter: blur(16px);
-            background: rgba(3, 7, 18, 0.85);
-            border-bottom: 1px solid rgba(45, 212, 191, 0.4);
-            padding: 1rem 2rem;
+            backdrop-filter: blur(20px);
+            background: rgba(3, 7, 18, 0.9);
+            border-bottom: 1px solid rgba(45, 212, 191, 0.3);
+            padding: 1rem 2.5rem;
             position: sticky;
             top: 0;
-            z-index: 100;
+            z-index: 1000;
             display: flex;
             flex-wrap: wrap;
             justify-content: space-between;
             align-items: center;
+            transition: all 0.3s;
         }
         .logo {
-            font-size: 1.6rem;
+            font-size: 1.8rem;
             font-weight: 800;
             background: linear-gradient(135deg, #aaffff, #2dd4bf, #3b82f6);
             -webkit-background-clip: text;
             background-clip: text;
             color: transparent;
+            letter-spacing: -0.5px;
         }
-        .logo i { color: #2dd4bf; margin-right: 8px; }
-        .nav-links { display: flex; gap: 0.8rem; font-weight: 500; flex-wrap: wrap; }
-        .nav-links a { color: #ccddf8; text-decoration: none; transition: 0.2s; font-size: 0.85rem; }
-        .nav-links a:hover { color: #2dd4bf; text-shadow: 0 0 6px cyan; }
+        .logo i { color: #2dd4bf; margin-right: 10px; font-size: 1.6rem; }
+        .nav-links { display: flex; gap: 1.2rem; flex-wrap: wrap; }
+        .nav-links a { 
+            color: #ccddf8; 
+            text-decoration: none; 
+            transition: 0.3s; 
+            font-size: 0.9rem;
+            font-weight: 500;
+            padding: 6px 12px;
+            border-radius: 40px;
+        }
+        .nav-links a:hover { 
+            color: #2dd4bf; 
+            background: rgba(45, 212, 191, 0.1);
+            text-shadow: 0 0 8px cyan;
+        }
 
+        /* Hero Section */
         .hero {
             text-align: center;
-            padding: 4rem 2rem 3rem;
-            background: radial-gradient(circle at 30% 40%, #0f1629, #02040c);
-            border-bottom: 1px solid #1e2f44;
+            padding: 5rem 2rem 4rem;
+            background: radial-gradient(circle at 30% 40%, #0f1629cc, #02040c);
+            border-bottom: 1px solid rgba(45, 212, 191, 0.2);
+            position: relative;
+            overflow: hidden;
         }
-        .hero h1 { font-size: 3.5rem; font-weight: 800; background: linear-gradient(145deg, #ffffff, #7dd3fc, #2dd4bf); -webkit-background-clip: text; background-clip: text; color: transparent; }
-        .hero p { max-width: 800px; margin: 1.2rem auto; color: #bac8e6; font-size: 1.2rem; }
-        .badge-cta { display: inline-flex; align-items: center; gap: 10px; background: #1e2a3e; padding: 0.6rem 1.8rem; border-radius: 60px; border-left: 3px solid #2dd4bf; }
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(45,212,191,0.08) 0%, transparent 70%);
+            animation: rotate 20s linear infinite;
+        }
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+        .hero h1 { font-size: 4rem; font-weight: 800; background: linear-gradient(145deg, #ffffff, #7dd3fc, #2dd4bf); -webkit-background-clip: text; background-clip: text; color: transparent; position: relative; z-index: 1; }
+        .hero p { max-width: 800px; margin: 1.5rem auto; color: #bac8e6; font-size: 1.2rem; position: relative; z-index: 1; }
+        .badge-cta { 
+            display: inline-flex; 
+            align-items: center; 
+            gap: 12px; 
+            background: rgba(30, 42, 62, 0.8);
+            backdrop-filter: blur(10px);
+            padding: 0.7rem 2rem; 
+            border-radius: 60px; 
+            border-left: 3px solid #2dd4bf;
+            font-weight: 500;
+            position: relative;
+            z-index: 1;
+        }
         
-        .section-title { font-size: 2rem; font-weight: 700; margin: 3rem 0 1.5rem; text-align: center; }
-        .section-title i { color: #2dd4bf; margin-right: 12px; background: #1a2a3f; padding: 8px; border-radius: 50%; }
+        .section-title { 
+            font-size: 2.5rem; 
+            font-weight: 700; 
+            margin: 3.5rem 0 2rem; 
+            text-align: center;
+            letter-spacing: -0.02em;
+        }
+        .section-title i { 
+            color: #2dd4bf; 
+            margin-right: 15px; 
+            background: rgba(45, 212, 191, 0.15);
+            padding: 12px;
+            border-radius: 50%;
+            font-size: 1.8rem;
+        }
 
-        /* Category index grid */
+        /* Category Grid Enhanced */
         .mini-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 1.2rem;
-            max-width: 1300px;
-            margin: 0 auto 2rem;
-            padding: 0 1.5rem;
+            grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+            gap: 1.5rem;
+            max-width: 1400px;
+            margin: 0 auto 2.5rem;
+            padding: 0 1.8rem;
         }
         .mini-card {
-            background: rgba(12, 18, 28, 0.7);
-            border-radius: 1.2rem;
-            padding: 1rem;
+            background: rgba(12, 18, 28, 0.75);
+            backdrop-filter: blur(8px);
+            border-radius: 1.5rem;
+            padding: 1.3rem;
             text-align: center;
-            border: 1px solid #2dd4bf30;
-            transition: 0.2s;
+            border: 1px solid rgba(45, 212, 191, 0.25);
+            transition: all 0.3s cubic-bezier(0.2, 0.9, 0.4, 1.1);
             cursor: pointer;
         }
-        .mini-card i { font-size: 1.8rem; color: #2dd4bf; margin-bottom: 0.5rem; display: block; }
-        .mini-card:hover { transform: translateY(-5px); border-color: #2dd4bf; }
+        .mini-card i { font-size: 2.2rem; color: #2dd4bf; margin-bottom: 0.8rem; display: block; }
+        .mini-card span { font-size: 0.9rem; font-weight: 500; }
+        .mini-card:hover { 
+            transform: translateY(-8px); 
+            border-color: #2dd4bf;
+            background: rgba(20, 30, 50, 0.9);
+            box-shadow: 0 20px 30px -12px rgba(45, 212, 191, 0.2);
+        }
 
-        /* detailed domain cards (wiki style) */
+        /* Domain Wiki Cards - Enhanced Verbosity */
         .wiki-container {
             max-width: 1400px;
             margin: 0 auto 2rem;
-            padding: 0 1.5rem;
+            padding: 0 1.8rem;
         }
         .domain-wiki-card {
             background: rgba(12, 18, 28, 0.85);
-            backdrop-filter: blur(4px);
+            backdrop-filter: blur(8px);
             border-radius: 2rem;
-            margin-bottom: 2rem;
+            margin-bottom: 2.5rem;
             overflow: hidden;
             border: 1px solid rgba(45, 212, 191, 0.3);
+            transition: all 0.3s;
+        }
+        .domain-wiki-card:hover {
+            border-color: rgba(45, 212, 191, 0.6);
+            box-shadow: 0 15px 35px -15px rgba(0,0,0,0.5);
         }
         .wiki-header {
-            background: #0f172ac0;
-            padding: 1rem 1.8rem;
+            background: linear-gradient(135deg, #0f172a, #0a0f1f);
+            padding: 1.2rem 2rem;
             border-bottom: 1px solid #2dd4bf40;
             display: flex;
             align-items: center;
-            gap: 1rem;
+            gap: 1.2rem;
             flex-wrap: wrap;
         }
-        .wiki-header i { font-size: 2rem; color: #2dd4bf; }
-        .wiki-header h2 { font-size: 1.5rem; }
-        .wiki-content { padding: 1.5rem; display: flex; flex-direction: column; gap: 1.2rem; }
-        .explanation-box { background: #070c18; border-radius: 1rem; padding: 1rem; }
-        .explanation-box h3 { color: #2dd4bf; margin-bottom: 0.5rem; font-size: 1.1rem; }
-        .schema-grid { display: flex; flex-wrap: wrap; gap: 1rem; margin-top: 0.5rem; }
+        .wiki-header i { font-size: 2.5rem; color: #2dd4bf; }
+        .wiki-header h2 { font-size: 1.8rem; font-weight: 700; }
+        .wiki-content { padding: 2rem; display: flex; flex-direction: column; gap: 1.5rem; }
+        .explanation-box { background: rgba(7, 12, 24, 0.8); border-radius: 1.2rem; padding: 1.3rem; border-left: 3px solid #2dd4bf; }
+        .explanation-box h3 { color: #2dd4bf; margin-bottom: 0.8rem; font-size: 1.2rem; display: flex; align-items: center; gap: 8px; }
+        .explanation-box p { color: #cbd5ff; line-height: 1.6; }
+        .schema-grid { display: flex; flex-wrap: wrap; gap: 1.2rem; margin-top: 0.5rem; }
         .schema-item {
-            background: #0e1428;
+            background: rgba(14, 20, 40, 0.9);
             border-radius: 1rem;
-            padding: 0.8rem;
+            padding: 1rem;
             flex: 1;
-            min-width: 180px;
+            min-width: 200px;
             border-left: 3px solid #2dd4bf;
-            font-size: 0.85rem;
+            transition: 0.2s;
         }
+        .schema-item:hover { transform: translateX(5px); background: rgba(20, 28, 50, 0.9); }
+        .schema-item strong { color: #2dd4bf; display: block; margin-bottom: 6px; }
         .example-code {
             background: #03060e;
-            padding: 0.8rem;
+            padding: 1rem;
             border-radius: 1rem;
-            font-family: monospace;
-            font-size: 0.8rem;
+            font-family: 'Courier New', monospace;
+            font-size: 0.85rem;
             color: #b9e6ff;
             overflow-x: auto;
+            border: 1px solid #2dd4bf20;
         }
-        .badge-list { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-top: 0.3rem; }
-        .badge { background: #1e2a3e; padding: 3px 8px; border-radius: 40px; font-size: 0.65rem; }
+        .badge-list { display: flex; flex-wrap: wrap; gap: 0.6rem; margin-top: 0.5rem; }
+        .badge { background: rgba(30, 42, 62, 0.9); padding: 4px 12px; border-radius: 40px; font-size: 0.7rem; font-weight: 500; color: #7dd3fc; }
 
-        /* glossary grid */
+        /* Glossary Enhanced */
         .glossary-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-            gap: 1rem;
-            max-width: 1300px;
-            margin: 1rem auto 2rem;
-            padding: 0 1.5rem;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 1.2rem;
+            max-width: 1400px;
+            margin: 1.5rem auto 2rem;
+            padding: 0 1.8rem;
         }
         .glossary-card {
-            background: #0e1428;
-            border-radius: 1rem;
-            padding: 1rem;
+            background: rgba(14, 20, 40, 0.85);
+            backdrop-filter: blur(4px);
+            border-radius: 1.2rem;
+            padding: 1.2rem;
             border-left: 3px solid #2dd4bf;
+            transition: all 0.2s;
         }
-        .glossary-card h4 { margin-bottom: 0.3rem; color: #2dd4bf; font-size: 1rem; }
-        .glossary-card p { font-size: 0.8rem; color: #cbd5ff; }
+        .glossary-card:hover { transform: translateY(-3px); background: rgba(20, 28, 55, 0.9); }
+        .glossary-card h4 { margin-bottom: 0.5rem; color: #2dd4bf; font-size: 1.1rem; }
+        .glossary-card p { font-size: 0.85rem; color: #cbd5ff; line-height: 1.5; }
 
-        /* tool table */
+        /* Tool Table Enhanced */
         .tool-table {
-            max-width: 1200px;
+            max-width: 1300px;
             margin: 0 auto 2rem;
-            background: #0a0f1a;
+            background: rgba(10, 15, 26, 0.9);
             border-radius: 1.5rem;
             overflow-x: auto;
+            backdrop-filter: blur(4px);
         }
         table { width: 100%; border-collapse: collapse; }
-        th, td { padding: 0.8rem; text-align: left; border-bottom: 1px solid #1e2a44; font-size: 0.85rem; }
-        th { color: #2dd4bf; font-weight: 600; }
+        th, td { padding: 1rem 1.2rem; text-align: left; border-bottom: 1px solid rgba(45, 212, 191, 0.2); font-size: 0.9rem; }
+        th { color: #2dd4bf; font-weight: 600; background: rgba(0,0,0,0.2); }
+        tr:hover { background: rgba(45, 212, 191, 0.05); }
 
-        /* methodology steps */
+        /* Methodology Steps */
         .methodology-steps {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 1rem;
-            justify-content: center;
-            max-width: 1300px;
-            margin: 1rem auto;
-            padding: 0 1rem;
-        }
-        .step {
-            background: #101826;
-            border-radius: 1rem;
-            padding: 1rem;
-            width: 180px;
-            text-align: center;
-        }
-        .step .num { background: #2dd4bf; width: 28px; height: 28px; border-radius: 28px; display: inline-flex; align-items: center; justify-content: center; margin-bottom: 0.5rem; font-weight: bold; color: #0a0c12; font-size: 0.8rem; }
-
-        /* resource cards */
-        .resource-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
-            gap: 1rem;
-            max-width: 1300px;
-            margin: 1rem auto;
-            padding: 0 1.5rem;
-        }
-        .resource-card { background: #0e1428; border-radius: 1rem; padding: 0.8rem; }
-        .resource-card a { color: #cbd5ff; text-decoration: none; display: flex; align-items: center; gap: 8px; font-size: 0.85rem; }
-        .resource-card a:hover { color: #2dd4bf; }
-
-        /* learning path cards */
-        .path-container {
             display: flex;
             flex-wrap: wrap;
             gap: 1.2rem;
             justify-content: center;
-            max-width: 1300px;
-            margin: 1rem auto;
-            padding: 0 1rem;
+            max-width: 1400px;
+            margin: 1.5rem auto;
+            padding: 0 1.5rem;
+        }
+        .step {
+            background: linear-gradient(145deg, #101826, #0a0f1a);
+            border-radius: 1.2rem;
+            padding: 1.2rem;
+            width: 190px;
+            text-align: center;
+            transition: 0.2s;
+            border: 1px solid #2dd4bf20;
+        }
+        .step:hover { transform: translateY(-5px); border-color: #2dd4bf60; }
+        .step .num { background: #2dd4bf; width: 32px; height: 32px; border-radius: 32px; display: inline-flex; align-items: center; justify-content: center; margin-bottom: 0.8rem; font-weight: bold; color: #0a0c12; }
+
+        /* Learning Path */
+        .path-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1.5rem;
+            justify-content: center;
+            max-width: 1400px;
+            margin: 1.5rem auto;
+            padding: 0 1.5rem;
         }
         .path-card {
-            background: #0e1325;
-            border-radius: 1.2rem;
-            padding: 1rem;
-            width: 240px;
+            background: linear-gradient(145deg, #0e1325, #080c18);
+            border-radius: 1.5rem;
+            padding: 1.3rem;
+            width: 260px;
+            transition: 0.2s;
+            border: 1px solid #2dd4bf20;
         }
-        .path-card h4 { margin-bottom: 0.5rem; font-size: 1rem; }
-        .path-card ul { list-style: none; font-size: 0.75rem; }
-        .path-card li { margin: 0.4rem 0; }
+        .path-card:hover { transform: translateY(-5px); border-color: #2dd4bf40; }
+        .path-card h4 { margin-bottom: 0.8rem; font-size: 1.1rem; color: #2dd4bf; }
+        .path-card ul { list-style: none; font-size: 0.8rem; }
+        .path-card li { margin: 0.6rem 0; display: flex; align-items: center; gap: 8px; }
+        .path-card li i { color: #2dd4bf; font-size: 0.7rem; }
 
+        /* Stats Bar */
         .stats-bar {
             display: flex;
             flex-wrap: wrap;
             justify-content: center;
-            gap: 2rem;
-            background: #060a14;
-            border-radius: 2rem;
-            max-width: 900px;
-            margin: 2rem auto;
-            padding: 1.5rem;
+            gap: 2.5rem;
+            background: rgba(6, 10, 20, 0.7);
+            backdrop-filter: blur(8px);
+            border-radius: 3rem;
+            max-width: 1000px;
+            margin: 2.5rem auto;
+            padding: 1.8rem 2rem;
         }
         .stat-item { text-align: center; }
-        .stat-number { font-size: 2rem; font-weight: 800; color: #2dd4bf; }
+        .stat-number { font-size: 2.2rem; font-weight: 800; color: #2dd4bf; margin-bottom: 0.3rem; }
 
-        footer { text-align: center; padding: 2rem; font-size: 0.8rem; color: #5f6e8f; margin-top: 2rem; border-top: 1px solid #1e2f44; }
-        @media (max-width: 700px) { .navbar { flex-direction: column; gap: 12px; } .hero h1 { font-size: 2rem; } .wiki-header { flex-direction: column; align-items: flex-start; } }
+        /* Resource Grid */
+        .resource-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 1.2rem;
+            max-width: 1400px;
+            margin: 1.5rem auto;
+            padding: 0 1.8rem;
+        }
+        .resource-card { 
+            background: rgba(14, 20, 40, 0.85);
+            border-radius: 1rem; 
+            padding: 1rem 1.2rem;
+            transition: all 0.2s;
+            border: 1px solid rgba(45, 212, 191, 0.2);
+        }
+        .resource-card:hover { transform: translateX(5px); border-color: #2dd4bf; background: rgba(20, 28, 55, 0.9); }
+        .resource-card a { color: #cbd5ff; text-decoration: none; display: flex; align-items: center; gap: 12px; font-weight: 500; }
+        .resource-card a i { color: #2dd4bf; font-size: 1.2rem; }
+
+        footer { text-align: center; padding: 2.5rem; font-size: 0.85rem; color: #6a7c9e; margin-top: 2rem; border-top: 1px solid rgba(45, 212, 191, 0.2); }
+        
+        @media (max-width: 768px) {
+            .navbar { flex-direction: column; gap: 15px; padding: 1rem; }
+            .hero h1 { font-size: 2.2rem; }
+            .section-title { font-size: 1.8rem; }
+            .wiki-header h2 { font-size: 1.3rem; }
+            .wiki-content { padding: 1.2rem; }
+        }
     </style>
 </head>
 <body>
 <nav class="navbar">
     <div class="logo"><i class="fas fa-brain"></i> AIAC CTF WIKIPEDIA</div>
     <div class="nav-links">
-        <a href="#domains">📚 Domains</a>
-        <a href="#glossary">📖 Glossary</a>
-        <a href="#tools">🛠️ Tools</a>
-        <a href="#methodology">⚙️ Methodology</a>
-        <a href="#learning">🎯 Learning</a>
-        <a href="#resources">📡 Resources</a>
+        <a href="#domains"><i class="fas fa-cubes"></i> Domains</a>
+        <a href="#glossary"><i class="fas fa-book"></i> Glossary</a>
+        <a href="#tools"><i class="fas fa-toolbox"></i> Tools</a>
+        <a href="#methodology"><i class="fas fa-diagram-project"></i> Methodology</a>
+        <a href="#learning"><i class="fas fa-graduation-cap"></i> Learning</a>
+        <a href="#resources"><i class="fas fa-folder-tree"></i> Resources</a>
     </div>
 </nav>
 
 <header class="hero">
-    <h1>📖 AIAC <span class="glow-text">CTF WIKIPEDIA</span> • The Complete Training Encyclopedia</h1>
-    <p>The most comprehensive static CTF knowledge base: domain deep-dives, attack schemas, tool reference, methodology, glossary, and curated resources.</p>
-    <div class="badge-cta"><i class="fas fa-book-open"></i> 8 domains • 100+ concepts • 50+ tools • Free forever</div>
+    <h1>📖 AIAC <span class="glow-text">CTF WIKIPEDIA</span></h1>
+    <p>The definitive static encyclopedia for Capture The Flag training — comprehensive domain explanations, attack schemas, tool references, and a complete methodology guide.</p>
+    <div class="badge-cta"><i class="fas fa-shield-haltered"></i> 8 Core Domains • 100+ Attack Vectors • 50+ Essential Tools • 4 Learning Stages</div>
 </header>
 
-<!-- ========= DOMAIN INDEX ========= -->
-<div class="section-title" id="domains"><i class="fas fa-cubes"></i> CTF Domains Index</div>
+<!-- Domain Index -->
+<div class="section-title" id="domains"><i class="fas fa-cubes"></i> CTF Battle Domains</div>
 <div class="mini-grid">
-    <div class="mini-card" onclick="document.getElementById('crypto').scrollIntoView({behavior:'smooth'})"><i class="fas fa-lock"></i> Cryptography</div>
-    <div class="mini-card" onclick="document.getElementById('web').scrollIntoView({behavior:'smooth'})"><i class="fas fa-globe"></i> Web Exploitation</div>
-    <div class="mini-card" onclick="document.getElementById('binary').scrollIntoView({behavior:'smooth'})"><i class="fas fa-microchip"></i> Binary Exploitation</div>
-    <div class="mini-card" onclick="document.getElementById('forensics').scrollIntoView({behavior:'smooth'})"><i class="fas fa-search"></i> Forensics</div>
-    <div class="mini-card" onclick="document.getElementById('networking').scrollIntoView({behavior:'smooth'})"><i class="fas fa-network-wired"></i> Networking</div>
-    <div class="mini-card" onclick="document.getElementById('reverse').scrollIntoView({behavior:'smooth'})"><i class="fas fa-mobile-alt"></i> Reverse Engineering</div>
-    <div class="mini-card" onclick="document.getElementById('cloud').scrollIntoView({behavior:'smooth'})"><i class="fas fa-cloud-upload-alt"></i> Cloud Security</div>
-    <div class="mini-card" onclick="document.getElementById('misc').scrollIntoView({behavior:'smooth'})"><i class="fas fa-database"></i> Misc & Stego</div>
+    <div class="mini-card" onclick="document.getElementById('crypto').scrollIntoView({behavior:'smooth'})"><i class="fas fa-lock"></i><span>Cryptography</span></div>
+    <div class="mini-card" onclick="document.getElementById('web').scrollIntoView({behavior:'smooth'})"><i class="fas fa-globe"></i><span>Web Exploitation</span></div>
+    <div class="mini-card" onclick="document.getElementById('binary').scrollIntoView({behavior:'smooth'})"><i class="fas fa-microchip"></i><span>Binary Exploitation</span></div>
+    <div class="mini-card" onclick="document.getElementById('forensics').scrollIntoView({behavior:'smooth'})"><i class="fas fa-search"></i><span>Forensics</span></div>
+    <div class="mini-card" onclick="document.getElementById('reverse').scrollIntoView({behavior:'smooth'})"><i class="fas fa-mobile-alt"></i><span>Reverse Engineering</span></div>
+    <div class="mini-card" onclick="document.getElementById('networking').scrollIntoView({behavior:'smooth'})"><i class="fas fa-network-wired"></i><span>Networking</span></div>
+    <div class="mini-card" onclick="document.getElementById('cloud').scrollIntoView({behavior:'smooth'})"><i class="fas fa-cloud-upload-alt"></i><span>Cloud Security</span></div>
+    <div class="mini-card" onclick="document.getElementById('misc').scrollIntoView({behavior:'smooth'})"><i class="fas fa-database"></i><span>Misc & Stego</span></div>
 </div>
 
 <!-- ==================== CRYPTOGRAPHY ==================== -->
@@ -276,14 +377,15 @@
     <div class="domain-wiki-card">
         <div class="wiki-header"><i class="fas fa-lock"></i><h2>Cryptography — Breaking Codes & Ciphers</h2></div>
         <div class="wiki-content">
-            <div class="explanation-box"><h3>📖 What is Cryptography in CTF?</h3><p>Cryptography challenges involve breaking or abusing encryption algorithms, hashing functions, and encoding schemes. You'll encounter classical ciphers (Caesar, Vigenère, XOR), modern cryptography (RSA, AES, ECC), and hashing attacks (MD5/SHA1 collisions).</p></div>
+            <div class="explanation-box"><h3><i class="fas fa-info-circle"></i> What is Cryptography in CTF?</h3><p>Cryptography challenges test your ability to break, abuse, or bypass encryption algorithms, hashing functions, and encoding schemes. You'll encounter classical ciphers (Caesar, Vigenère, XOR), modern cryptography (RSA, AES, ECC), and hashing attacks (MD5/SHA1 collisions). Understanding mathematical foundations and implementation flaws is key to cracking these challenges.</p></div>
             <div class="schema-grid">
-                <div class="schema-item"><strong>🔢 Classical Ciphers</strong><br>Caesar shift, Atbash, Vigenère, Rail Fence, XOR repeating key. Frequency analysis & brute force.</div>
-                <div class="schema-item"><strong>🔑 Public Key (RSA)</strong><br>Small modulus, common modulus attack, Wiener attack, factorization (Fermat, Pollard p-1).</div>
-                <div class="schema-item"><strong>🔒 Hashing Attacks</strong><br>Length extension, hash collisions (MD5), rainbow tables, salt bypass.</div>
+                <div class="schema-item"><strong>🔢 Classical Ciphers</strong><br>Caesar shift, Atbash, Vigenère, Rail Fence, XOR with repeating key. Attack methods: frequency analysis, brute force, known-plaintext.</div>
+                <div class="schema-item"><strong>🔑 Public Key (RSA)</strong><br>Common vulnerabilities: small modulus, common modulus attack, Wiener attack (small d), factorization (Fermat, Pollard p-1), Hastad broadcast attack.</div>
+                <div class="schema-item"><strong>🔒 Hashing Attacks</strong><br>Length extension attacks (MD5, SHA1), hash collisions, rainbow tables, salt bypass, preimage attacks.</div>
+                <div class="schema-item"><strong>🔐 Block Ciphers (AES)</strong><br>ECB mode byte-at-a-time decryption, padding oracle attacks, CBC bit flipping, side-channel timing.</div>
             </div>
-            <div class="example-code"><strong>💡 Example: RSA with small exponent</strong><br>Given n, e=3, and ciphertext c, if m^3 < n, take cube root → flag{small_rsa_exponents_are_bad}</div>
-            <div class="badge-list"><span class="badge">RsaCtfTool</span><span class="badge">CyberChef</span><span class="badge">hashcat</span><span class="badge">John</span><span class="badge">XORTool</span></div>
+            <div class="example-code"><strong>💡 Example: RSA with small exponent (e=3)</strong><br>Given n = 123456789, ciphertext c = 125, if m³ < n, plaintext m = cube_root(c). Use integer root to recover: flag{small_rsa_exponents_are_critical_weaknesses}</div>
+            <div class="badge-list"><span class="badge">RsaCtfTool</span><span class="badge">CyberChef</span><span class="badge">hashcat</span><span class="badge">John the Ripper</span><span class="badge">XORTool</span><span class="badge">FeatherDuster</span></div>
         </div>
     </div>
 </div>
@@ -291,17 +393,18 @@
 <!-- ==================== WEB EXPLOITATION ==================== -->
 <div id="web" class="wiki-container">
     <div class="domain-wiki-card">
-        <div class="wiki-header"><i class="fas fa-globe"></i><h2>Web Exploitation — Hacking the Browser</h2></div>
+        <div class="wiki-header"><i class="fas fa-globe"></i><h2>Web Exploitation — Hacking Modern Web Apps</h2></div>
         <div class="wiki-content">
-            <div class="explanation-box"><h3>🎯 Core Web Vulnerabilities</h3><p>Web CTFs test SQL injection, XSS, CSRF, SSTI, SSRF, path traversal, JWT tampering, and authentication bypasses.</p></div>
+            <div class="explanation-box"><h3><i class="fas fa-bug"></i> Core Web Vulnerabilities</h3><p>Web CTFs focus on exploiting flaws in web applications, APIs, and browsers. Attack classes include SQL injection, Cross-Site Scripting (XSS), CSRF, Server-Side Template Injection (SSTI), SSRF, path traversal, JWT tampering, authentication bypasses, and deserialization attacks.</p></div>
             <div class="schema-grid">
-                <div class="schema-item"><strong>💉 SQL Injection</strong><br>' OR 1=1 --, UNION SELECT, Blind boolean/time-based exfiltration.</div>
-                <div class="schema-item"><strong>🌐 XSS</strong><br>Stored, Reflected, DOM-based. Steal cookies, keylogging.</div>
-                <div class="schema-item"><strong>⚙️ SSTI</strong><br>Jinja2/Twig template injection → RCE, file read.</div>
-                <div class="schema-item"><strong>🔗 SSRF</strong><br>Request to metadata endpoints (169.254.169.254) or internal services.</div>
+                <div class="schema-item"><strong>💉 SQL Injection</strong><br>Classic: ' OR 1=1 -- · Union-based data extraction · Blind boolean/time-based exfiltration · Second-order injection.</div>
+                <div class="schema-item"><strong>🌐 XSS (Cross-Site Scripting)</strong><br>Stored (persistent), Reflected, DOM-based. Impact: session theft, keylogging, CSRF bypass, account takeover.</div>
+                <div class="schema-item"><strong>⚙️ SSTI (Template Injection)</strong><br>Jinja2, Twig, Freemarker, Velocity. Abuse template context to execute code, read files, achieve RCE.</div>
+                <div class="schema-item"><strong>🔗 SSRF (Server-Side Request Forgery)</strong><br>Make server send requests to internal services, metadata endpoints (169.254.169.254), or localhost. Port scanning, cloud credential theft.</div>
+                <div class="schema-item"><strong>🔐 JWT Attacks</strong><br>Algorithm confusion (RS256 → HS256), 'none' signature, brute-forcing weak secrets, kid path traversal.</div>
             </div>
-            <div class="example-code"><strong>💡 Example: SQLi Login Bypass</strong><br>Username: admin' -- , password: anything → bypasses authentication.</div>
-            <div class="badge-list"><span class="badge">Burp Suite</span><span class="badge">sqlmap</span><span class="badge">FFUF</span><span class="badge">XSStrike</span></div>
+            <div class="example-code"><strong>💡 Example: SQLi Authentication Bypass</strong><br>Login form vulnerable. Payload: <br>username: admin' OR '1'='1' -- <br>password: anything<br>Result: Bypasses authentication, returns admin session → flag{you_escaped_the_login_wall}</div>
+            <div class="badge-list"><span class="badge">Burp Suite Pro/Community</span><span class="badge">sqlmap</span><span class="badge">FFUF</span><span class="badge">XSStrike</span><span class="badge">CyberChef</span><span class="badge">Caido</span></div>
         </div>
     </div>
 </div>
@@ -309,16 +412,17 @@
 <!-- ==================== BINARY EXPLOITATION ==================== -->
 <div id="binary" class="wiki-container">
     <div class="domain-wiki-card">
-        <div class="wiki-header"><i class="fas fa-microchip"></i><h2>Binary Exploitation (Pwn) — Memory Corruption</h2></div>
+        <div class="wiki-header"><i class="fas fa-microchip"></i><h2>Binary Exploitation (Pwn) — Memory Corruption Mastery</h2></div>
         <div class="wiki-content">
-            <div class="explanation-box"><h3>🖥️ Low-Level Exploitation</h3><p>Attack vectors: buffer overflows, format strings, heap overflows, use-after-free. Mitigations: ASLR, NX, PIE, canaries.</p></div>
+            <div class="explanation-box"><h3><i class="fas fa-memory"></i> Low-Level Exploitation</h3><p>Pwning requires exploiting compiled C/C++ binaries. Attack vectors include buffer overflows, format strings, heap overflows, use-after-free, and race conditions. Modern mitigations (ASLR, NX/DEP, PIE, stack canaries, CFG) add complexity requiring ROP, ret2libc, or advanced heap techniques.</p></div>
             <div class="schema-grid">
-                <div class="schema-item"><strong>📦 Stack Overflow</strong><br>Overwrite return address to win function or shellcode.</div>
-                <div class="schema-item"><strong>🔁 ROP</strong><br>Chain gadgets from libc to bypass NX/ASLR.</div>
-                <div class="schema-item"><strong>📝 Format String</strong><br>%p, %x to leak, %n to overwrite GOT entries.</div>
+                <div class="schema-item"><strong>📦 Stack Buffer Overflow</strong><br>Overwrite return address to redirect execution to a win function, shellcode, or ROP chain. Offset calculation is critical.</div>
+                <div class="schema-item"><strong>🔁 ROP (Return Oriented Programming)</strong><br>Chain small code gadgets (ends with 'ret') from libc or binary to bypass NX/ASLR. Call system('/bin/sh').</div>
+                <div class="schema-item"><strong>📝 Format String Vulnerabilities</strong><br>Use %p, %x to leak stack values (canaries, libc addresses). Use %n to arbitrarily write to GOT entries.</div>
+                <div class="schema-item"><strong>🏥 Heap Exploitation</strong><br>tcache poisoning, fastbin dup, unsafe unlink, House of Force/Muney — achieve arbitrary write via malloc metadata.</div>
             </div>
-            <div class="example-code"><strong>💡 Example: ret2win</strong><br>python -c 'print("A"*72 + "\xef\xbe\xad\xde")' | ./vuln</div>
-            <div class="badge-list"><span class="badge">pwntools</span><span class="badge">gdb/pwndbg</span><span class="badge">ROPgadget</span></div>
+            <div class="example-code"><strong>💡 Example: ret2win (basic 64-bit buffer overflow)</strong><br>python -c 'print("A"*72 + "\xef\xbe\xad\xde\xef\xbe\xad\xde")' | ./vuln<br>Explanation: 72 bytes padding + address of win function (little-endian) → prints flag.</div>
+            <div class="badge-list"><span class="badge">pwntools</span><span class="badge">gdb + pwndbg/peda</span><span class="badge">checksec</span><span class="badge">ROPgadget</span><span class="badge">one_gadget</span><span class="badge">angr</span></div>
         </div>
     </div>
 </div>
@@ -326,16 +430,17 @@
 <!-- ==================== FORENSICS ==================== -->
 <div id="forensics" class="wiki-container">
     <div class="domain-wiki-card">
-        <div class="wiki-header"><i class="fas fa-search"></i><h2>Digital Forensics — Artifact Analysis</h2></div>
+        <div class="wiki-header"><i class="fas fa-search"></i><h2>Digital Forensics — Artifact & Trace Analysis</h2></div>
         <div class="wiki-content">
-            <div class="explanation-box"><h3>🔍 Recovering Hidden Traces</h3><p>Analyze disk images, memory dumps, PCAPs, logs. Extract deleted files, steganography, network streams.</p></div>
+            <div class="explanation-box"><h3><i class="fas fa-fingerprint"></i> Recovering Hidden Traces</h3><p>Forensic challenges provide disk images, memory dumps, network captures (PCAP), or log files. You'll extract deleted files, analyze network streams, find steganography, reconstruct attacker activities, and recover flags from corrupted or fragmented data.</p></div>
             <div class="schema-grid">
-                <div class="schema-item"><strong>📡 PCAP Analysis</strong><br>Wireshark filters, follow TCP streams, extract files.</div>
-                <div class="schema-item"><strong>🧠 Memory Forensics</strong><br>Volatility: pslist, dumpfiles, hashdump.</div>
-                <div class="schema-item"><strong>🖼️ Steganography</strong><br>LSB hiding, metadata, audio spectrograms.</div>
+                <div class="schema-item"><strong>📡 PCAP Analysis</strong><br>Wireshark filters (http, dns, tcp.stream), follow TCP streams, extract files transferred, identify suspicious DNS tunneling or exfiltration.</div>
+                <div class="schema-item"><strong>🧠 Memory Forensics (Volatility)</strong><br>Plugins: pslist (processes), dumpfiles (extract files), hashdump (password hashes), netscan (network connections), malfind (injected code).</div>
+                <div class="schema-item"><strong>🖼️ Image Steganography</strong><br>LSB hiding in pixels, metadata (exiftool), embedded ZIP/RAR, color palette stego, audio spectrograms (Audacity).</div>
+                <div class="schema-item"><strong>💾 Disk & Carving</strong><br>Recover deleted files (foremost, scalpel), analyze MFT, unallocated space, HFS+/NTFS artifacts.</div>
             </div>
-            <div class="example-code"><strong>💡 Example: Extract hidden ZIP</strong><br>binwalk -e suspicious.jpg → extracts embedded zip with flag</div>
-            <div class="badge-list"><span class="badge">Wireshark</span><span class="badge">Volatility</span><span class="badge">binwalk</span><span class="badge">steghide</span></div>
+            <div class="example-code"><strong>💡 Example: Extract hidden ZIP from image</strong><br>binwalk -e suspicious.jpg → discovers embedded zip archive containing flag.txt<br>strings suspicious.jpg | grep "flag" → sometimes reveals plaintext flag in metadata.</div>
+            <div class="badge-list"><span class="badge">Wireshark</span><span class="badge">Volatility</span><span class="badge">binwalk</span><span class="badge">steghide</span><span class="badge">exiftool</span><span class="badge">foremost</span><span class="badge">Autopsy</span></div>
         </div>
     </div>
 </div>
@@ -345,13 +450,14 @@
     <div class="domain-wiki-card">
         <div class="wiki-header"><i class="fas fa-mobile-alt"></i><h2>Reverse Engineering — Under the Hood</h2></div>
         <div class="wiki-content">
-            <div class="explanation-box"><h3>⚙️ Analyzing Binaries Without Source</h3><p>Crackmes, malware analysis, protocol reversing. Use disassemblers (Ghidra, IDA) and debuggers.</p></div>
+            <div class="explanation-box"><h3><i class="fas fa-cogs"></i> Analyzing Binaries Without Source Code</h3><p>Reverse engineering tasks include crackmes, malware analysis, protocol reversing, and anti-debug bypasses. You'll use disassemblers (Ghidra, IDA), decompilers, debuggers (x64dbg, gdb), and deobfuscation techniques.</p></div>
             <div class="schema-grid">
-                <div class="schema-item"><strong>📐 Static Analysis</strong><br>Decompile to identify flag verification, constants.</div>
-                <div class="schema-item"><strong>🐞 Dynamic Analysis</strong><br>Breakpoints, patch conditional jumps (NOP).</div>
+                <div class="schema-item"><strong>📐 Static Analysis</strong><br>Ghidra/IDA decompilation: identify flag verification functions, look for constants/strings, anti-debug tricks, unpacking.</div>
+                <div class="schema-item"><strong>🐞 Dynamic Analysis</strong><br>Breakpoints, stepping through execution, patching conditional jumps (NOP/JMP), tracing API calls.</div>
+                <div class="schema-item"><strong>🧩 Obfuscation & Packers</strong><br>Unpacking UPX/ASPack, deobfuscating control flow flattening, constant unfolding, string decryption.</div>
             </div>
-            <div class="example-code"><strong>💡 Example: Keygen</strong><br>Reverse XOR routine → script to generate valid serial: flag{reversing_is_fun}</div>
-            <div class="badge-list"><span class="badge">Ghidra</span><span class="badge">IDA Free</span><span class="badge">x64dbg</span><span class="badge">Radare2</span></div>
+            <div class="example-code"><strong>💡 Example: Crackme keygen</strong><br>Reverse login binary, find XOR key '0x2A', write Python script to generate valid serial. Flag format example: AIAC{reversing_is_an_art}</div>
+            <div class="badge-list"><span class="badge">Ghidra</span><span class="badge">IDA Free/Pro</span><span class="badge">x64dbg</span><span class="badge">Radare2 (r2)</span><span class="badge">dnSpy (.NET)</span><span class="badge">Binary Ninja</span></div>
         </div>
     </div>
 </div>
@@ -359,15 +465,16 @@
 <!-- ==================== NETWORKING ==================== -->
 <div id="networking" class="wiki-container">
     <div class="domain-wiki-card">
-        <div class="wiki-header"><i class="fas fa-network-wired"></i><h2>Networking & Protocols</h2></div>
+        <div class="wiki-header"><i class="fas fa-network-wired"></i><h2>Networking & Protocols — Packet Mastery</h2></div>
         <div class="wiki-content">
-            <div class="explanation-box"><h3>🌍 Network Layer Exploitation</h3><p>Packet crafting, protocol analysis, OSINT, service exploitation.</p></div>
+            <div class="explanation-box"><h3><i class="fas fa-globe"></i> Network Layer Exploitation & OSINT</h3><p>Networking CTFs require analyzing custom protocols, packet crafting, and service exploitation. Includes OSINT (public information gathering) from sources like Shodan, DNS records, social media, and Google dorks.</p></div>
             <div class="schema-grid">
-                <div class="schema-item"><strong>📡 Packet Crafting</strong><br>Scapy to forge TCP/UDP/ICMP packets.</div>
-                <div class="schema-item"><strong>🔍 OSINT</strong><br>theHarvester, Google dorks, Shodan.</div>
+                <div class="schema-item"><strong>📡 Packet Crafting & Analysis</strong><br>Scapy to forge TCP/UDP/ICMP packets, replay attacks, manipulate TCP flags, DNS exfiltration detection.</div>
+                <div class="schema-item"><strong>🔍 OSINT (Open Source Intelligence)</strong><br>theHarvester, Maltego, Shodan, Censys, Google dorks (`intitle:index.of`, `filetype:log`), DNS reconnaissance.</div>
+                <div class="schema-item"><strong>🔄 Protocol Reversing</strong><br>Reverse unknown binary protocols, analyze custom UDP/TCP communication, extract flags from malformed packets.</div>
             </div>
-            <div class="example-code"><strong>💡 Example: DNS tunnel</strong><br>tshark -r capture.pcap -Y 'dns.qry.name contains "flag"'</div>
-            <div class="badge-list"><span class="badge">Wireshark</span><span class="badge">Scapy</span><span class="badge">nmap</span><span class="badge">theHarvester</span></div>
+            <div class="example-code"><strong>💡 Example: Extract flag from DNS tunnel</strong><br>tshark -r capture.pcap -Y 'dns.qry.name contains "flag"' -T fields -e dns.qry.name → reveals exfiltrated data subdomain: flag{dns_is_leaky}.example.com</div>
+            <div class="badge-list"><span class="badge">Wireshark</span><span class="badge">Scapy (Python)</span><span class="badge">nmap</span><span class="badge">dig / nslookup</span><span class="badge">theHarvester</span><span class="badge">Shodan</span></div>
         </div>
     </div>
 </div>
@@ -377,13 +484,15 @@
     <div class="domain-wiki-card">
         <div class="wiki-header"><i class="fas fa-cloud-upload-alt"></i><h2>Cloud & Container Security</h2></div>
         <div class="wiki-content">
-            <div class="explanation-box"><h3>☁️ Modern Infrastructure Attacks</h3><p>AWS/Azure/GCP misconfigurations, IAM privilege escalation, container escape, metadata SSRF.</p></div>
+            <div class="explanation-box"><h3><i class="fas fa-cloud"></i> Modern Infrastructure Attacks</h3><p>Cloud CTFs involve AWS/Azure/GCP misconfigurations: overly permissive IAM policies, exposed S3 buckets, metadata service SSRF, Lambda function injections, container escape via Docker/Kubernetes.</p></div>
             <div class="schema-grid">
-                <div class="schema-item"><strong>🐳 Docker Escape</strong><br>Privileged container, /proc mounts, docker socket exposure.</div>
-                <div class="schema-item"><strong>🔐 IAM Misconfig</strong><br>EC2 metadata: http://169.254.169.254/latest/meta-data/</div>
+                <div class="schema-item"><strong>🐳 Docker Container Escape</strong><br>Privileged container flag, /proc mounts, dirty cow (CVE-2016-5195), exposing docker socket (/var/run/docker.sock).</div>
+                <div class="schema-item"><strong>🔐 IAM & Metadata Misconfiguration</strong><br>SSRF to EC2 metadata (169.254.169.254/latest/meta-data/iam/security-credentials/) → IAM credentials extraction.</div>
+                <div class="schema-item"><strong>📦 S3 Bucket Exploitation</strong><br>Public listing, bucket policy misconfig, object ACL, signed URL abuse, versioning & deletion recovery.</div>
+                <div class="schema-item"><strong>☸️ Kubernetes (k8s) Attacks</strong><br>RBAC privilege escalation, etcd access, service account token abuse, kubelet API exposure.</div>
             </div>
-            <div class="example-code"><strong>💡 Example: SSRF to AWS metadata</strong><br>Fetch http://169.254.169.254/latest/meta-data/iam/security-credentials/ → access keys</div>
-            <div class="badge-list"><span class="badge">aws-cli</span><span class="badge">kubectl</span><span class="badge">Pacu</span></div>
+            <div class="example-code"><strong>💡 Example: SSRF to AWS metadata</strong><br>Vulnerable endpoint: /fetch?url=http://internal<br>Payload: http://169.254.169.254/latest/meta-data/iam/security-credentials/admin → returns AccessKeyId + SecretAccessKey → cloud takeover.</div>
+            <div class="badge-list"><span class="badge">AWS CLI</span><span class="badge">kubectl</span><span class="badge">Pacu (AWS framework)</span><span class="badge">Docker CLI</span><span class="badge">Cloud Console</span></div>
         </div>
     </div>
 </div>
@@ -393,117 +502,127 @@
     <div class="domain-wiki-card">
         <div class="wiki-header"><i class="fas fa-database"></i><h2>Miscellaneous & Steganography</h2></div>
         <div class="wiki-content">
-            <div class="explanation-box"><h3>🎲 Everything Else</h3><p>Audio analysis, QR codes, weird encoding, esolangs, LSB steganography.</p></div>
+            <div class="explanation-box"><h3><i class="fas fa-question-circle"></i> Everything Else — Weird Challenges & Stego</h3><p>Misc covers exotic challenges: audio analysis (spectrograms, SSTV), QR codes, weird encoding (base families, brainfuck, custom bases), esoteric programming languages, custom algorithms, and advanced steganography techniques.</p></div>
             <div class="schema-grid">
-                <div class="schema-item"><strong>🎵 Audio Stego</strong><br>Spectrograms (Audacity) reveal hidden images/text.</div>
-                <div class="schema-item"><strong>🃏 Encoding Hell</strong><br>Base families, hex, brainfuck, multiple layers.</div>
+                <div class="schema-item"><strong>🎵 Audio Steganography</strong><br>Spectrogram analysis (Audacity, Sonic Visualiser) reveals hidden images/text. SSTV decoding, LSB in audio samples.</div>
+                <div class="schema-item"><strong>🃏 Encoding Hell</strong><br>Base2/8/16/32/64/85/91, UUencode, XXencode, ROT13/47, brainfuck, JSFuck, custom XOR obfuscation. Decoding layers progressively reveals flag.</div>
+                <div class="schema-item"><strong>📷 Visual Stego</strong><br>QR codes reconstruction, barcodes, color channel LSB, pixel manipulation, invisible watermarks.</div>
+                <div class="schema-item"><strong>📄 File Format Tricks</strong><br>Polyglot files (ZIP+PNG), magic bytes spoofing, header/footer analysis.</div>
             </div>
-            <div class="example-code"><strong>💡 Example: LSB stego</strong><br>zsteg -a stego.png → extract hidden message from LSB bits</div>
-            <div class="badge-list"><span class="badge">zsteg</span><span class="badge">steghide</span><span class="badge">Audacity</span><span class="badge">CyberChef</span></div>
+            <div class="example-code"><strong>💡 Example: LSB steganography in PNG</strong><br>zsteg -a suspicious.png → extracts hidden ASCII message from least significant bits of RGB channels → flag{lsb_secrets_revealed}</div>
+            <div class="badge-list"><span class="badge">zsteg</span><span class="badge">steghide</span><span class="badge">Audacity</span><span class="badge">Sonic Visualiser</span><span class="badge">binwalk</span><span class="badge">CyberChef</span><span class="badge">QRazyBox</span></div>
         </div>
     </div>
 </div>
 
 <!-- ========= GLOSSARY ========= -->
-<div class="section-title" id="glossary"><i class="fas fa-book"></i> Essential Glossary & Attack Terms</div>
+<div class="section-title" id="glossary"><i class="fas fa-book"></i> Essential Glossary — 50+ Terms You Must Know</div>
 <div class="glossary-grid">
-    <div class="glossary-card"><h4>🔹 SQL Injection</h4><p>Malicious SQL queries to manipulate database. Union, Blind, Boolean, Error-based.</p></div>
-    <div class="glossary-card"><h4>🔹 XSS (Cross-Site Scripting)</h4><p>Inject client-side scripts. Stored, Reflected, DOM-based.</p></div>
-    <div class="glossary-card"><h4>🔹 Buffer Overflow</h4><p>Write beyond buffer boundaries to overwrite return address.</p></div>
-    <div class="glossary-card"><h4>🔹 ROP (Return Oriented Programming)</h4><p>Chain gadgets to bypass NX/ASLR.</p></div>
-    <div class="glossary-card"><h4>🔹 Steganography</h4><p>Hide data within images/audio. LSB, metadata, frequency domain.</p></div>
-    <div class="glossary-card"><h4>🔹 JWT Attack</h4><p>Algorithm confusion, none signature, brute-force secrets.</p></div>
-    <div class="glossary-card"><h4>🔹 SSRF</h4><p>Server-Side Request Forgery to internal resources.</p></div>
-    <div class="glossary-card"><h4>🔹 Format String</h4><p>%x, %p to leak, %n to overwrite memory.</p></div>
-    <div class="glossary-card"><h4>🔹 XXE</h4><p>XML External Entity attack to read files/SSRF.</p></div>
-    <div class="glossary-card"><h4>🔹 LFI/RFI</h4><p>Local/Remote File Inclusion via path traversal.</p></div>
+    <div class="glossary-card"><h4>🔹 SQL Injection</h4><p>Malicious SQL queries into input fields to manipulate database. Types: Union, Blind (boolean/time-based), Error-based, Second-order.</p></div>
+    <div class="glossary-card"><h4>🔹 XSS (Cross-Site Scripting)</h4><p>Injecting client-side scripts into web pages. Stored (persistent), Reflected, DOM-based.</p></div>
+    <div class="glossary-card"><h4>🔹 Buffer Overflow</h4><p>Writing beyond buffer boundaries to overwrite return address or adjacent variables, redirecting execution flow.</p></div>
+    <div class="glossary-card"><h4>🔹 ROP (Return Oriented Programming)</h4><p>Chaining small code snippets (gadgets) ending with 'ret' to bypass NX/ASLR and execute arbitrary code.</p></div>
+    <div class="glossary-card"><h4>🔹 ASLR (Address Space Layout Randomization)</h4><p>Memory randomization mitigation that makes ROP difficult; bypassed via info leaks.</p></div>
+    <div class="glossary-card"><h4>🔹 Canary / Stack Cookie</h4><p>Random value placed before return address. Overwriting triggers abort. Leak required for overflow.</p></div>
+    <div class="glossary-card"><h4>🔹 JWT Attack</h4><p>Algorithm confusion ('HS256' vs 'RS256'), 'none' signature, brute-forcing weak HMAC secrets. CVE-2018-0114.</p></div>
+    <div class="glossary-card"><h4>🔹 SSRF (Server-Side Request Forgery)</h4><p>Making server send requests to internal resources (metadata, localhost, internal IPs) causing information disclosure.</p></div>
+    <div class="glossary-card"><h4>🔹 Format String Vulnerability</h4><p>Using %x, %p, %s, %n specifiers to leak stack data or arbitrarily write to memory (GOT overwrite).</p></div>
+    <div class="glossary-card"><h4>🔹 GOT Overwrite (Global Offset Table)</h4><p>Overwrite function pointers in GOT to redirect dynamically linked function calls.</p></div>
+    <div class="glossary-card"><h4>🔹 XXE (XML External Entity)</h4><p>Exploiting XML parsers to read local files, perform SSRF, or cause DoS (Billion Laughs).</p></div>
+    <div class="glossary-card"><h4>🔹 LFI/RFI (Local/Remote File Inclusion)</h4><p>Path traversal (../../etc/passwd) or remote inclusion of malicious files leading to RCE.</p></div>
+    <div class="glossary-card"><h4>🔹 Spectrogram</h4><p>Visual representation of audio frequencies; often used to hide images/text in steganography challenges.</p></div>
+    <div class="glossary-card"><h4>🔹 LD_PRELOAD</h4><p>Environment variable to hijack library calls; used in local privilege escalation or binary challenges.</p></div>
+    <div class="glossary-card"><h4>🔹 Side-Channel Attack</h4><p>Exploiting physical or timing information (cache, power consumption, response time) to extract secrets.</p></div>
 </div>
 
 <!-- ========= TOOL TABLE ========= -->
-<div class="section-title" id="tools"><i class="fas fa-toolbox"></i> Ultimate Tool Reference</div>
+<div class="section-title" id="tools"><i class="fas fa-toolbox"></i> Ultimate Tool Reference — Weapons of Choice</div>
 <div class="tool-table">
     <table>
-        <thead><tr><th>Tool</th><th>Category</th><th>Purpose</th></tr></thead>
+        <thead><tr><th>Tool</th><th>Category</th><th>Purpose</th><th>Key Features</th></tr></thead>
         <tbody>
-            <tr><td>Burp Suite</td><td>Web</td><td>Proxy, scanner, intruder for web attacks</td></tr>
-            <tr><td>sqlmap</td><td>Web</td><td>Automatic SQL injection</td></tr>
-            <tr><td>CyberChef</td><td>Crypto/Encode</td><td>Swiss army knife for encoding/decryption</td></tr>
-            <tr><td>Ghidra</td><td>Reverse Eng</td><td>Decompiler and disassembler</td></tr>
-            <tr><td>pwntools</td><td>Binary Exploit</td><td>Python framework for exploit development</td></tr>
-            <tr><td>Wireshark</td><td>Forensics/Net</td><td>Packet analysis</td></tr>
-            <tr><td>Volatility</td><td>Forensics</td><td>Memory dump analysis</td></tr>
-            <tr><td>binwalk</td><td>Forensics/Stego</td><td>Extract embedded files</td></tr>
-            <tr><td>hashcat</td><td>Crypto</td><td>GPU-accelerated hash cracking</td></tr>
-            <tr><td>nmap</td><td>Networking</td><td>Network discovery and port scanning</td></tr>
+            <tr><td>Burp Suite</td><td>Web</td><td>Web proxy, scanner, intruder</td><td>Repeater, Sequencer, Extender, Collaborator</td></tr>
+            <tr><td>sqlmap</td><td>Web</td><td>Automatic SQL injection</td><td>36+ DBMS, blind/time-based, output tampering</td></tr>
+            <tr><td>CyberChef</td><td>Crypto/Encoding</td><td>Swiss army knife for data</td><td>300+ operations: decode, encrypt, format, regex</td></tr>
+            <tr><td>Ghidra</td><td>Reverse Eng</td><td>Decompiler & disassembler</td><td>NSA open-source, scriptable, function graphing</td></tr>
+            <tr><td>pwntools</td><td>Binary Exploit</td><td>Python exploit framework</td><td>ROP automation, assembly, shellcode generation</td></tr>
+            <tr><td>Wireshark</td><td>Forensics/Net</td><td>Packet analysis</td><td>Deep inspect, follow streams, 2000+ protocols</td></tr>
+            <tr><td>Volatility</td><td>Forensics</td><td>Memory forensics</td><td>Windows/Linux/Mac RAM plugins</td></tr>
+            <tr><td>binwalk</td><td>Forensics/Stego</td><td>Firmware & embedded files</td><td>Extract hidden files, carve signatures</td></tr>
+            <tr><td>hashcat</td><td>Crypto</td><td>GPU-accelerated hash cracking</td><td>300+ hash types, rules engine, mask attack</td></tr>
+            <tr><td>nmap</td><td>Networking</td><td>Network discovery & scanning</td><td>Service detection, script engine (NSE), OS fingerprint</td></tr>
         </tbody>
     </table>
 </div>
 
 <!-- ========= METHODOLOGY ========= -->
-<div class="section-title" id="methodology"><i class="fas fa-diagram-project"></i> CTF Attack Methodology</div>
+<div class="section-title" id="methodology"><i class="fas fa-diagram-project"></i> CTF Attack Methodology — Standard Workflow</div>
 <div class="methodology-steps">
-    <div class="step"><div class="num">1</div><strong>Recon</strong><br>Port scan, OSINT, directory brute-force</div>
-    <div class="step"><div class="num">2</div><strong>Fingerprint</strong><br>Identify services, versions, endpoints</div>
-    <div class="step"><div class="num">3</div><strong>Research</strong><br>CVEs, misconfigs, injection points</div>
-    <div class="step"><div class="num">4</div><strong>Exploit</strong><br>Craft payload, bypass mitigations</div>
-    <div class="step"><div class="num">5</div><strong>Post-Exploit</strong><br>Privilege escalation, extract flags</div>
-    <div class="step"><div class="num">6</div><strong>Report</strong><br>Document writeups, share knowledge</div>
+    <div class="step"><div class="num">1</div><strong>Reconnaissance</strong><br>Port scan (nmap), OSINT, directory brute-force (ffuf), subdomain enumeration.</div>
+    <div class="step"><div class="num">2</div><strong>Fingerprinting</strong><br>Identify services, versions, frameworks, hidden endpoints, technology stack.</div>
+    <div class="step"><div class="num">3</div><strong>Vulnerability Research</strong><br>Map CVEs, misconfigurations, weak crypto, injection points, known exploits.</div>
+    <div class="step"><div class="num">4</div><strong>Exploitation</strong><br>Craft payload, bypass mitigations, gain initial access or extract flag directly.</div>
+    <div class="step"><div class="num">5</div><strong>Post-Exploitation</strong><br>Privilege escalation, pivot to other services, extract multiple flags from filesystem/DB.</div>
+    <div class="step"><div class="num">6</div><strong>Documentation</strong><br>Write detailed writeup, share methodology, contribute to CTF community.</div>
 </div>
 
 <!-- ========= LEARNING PATH ========= -->
-<div class="section-title" id="learning"><i class="fas fa-chalkboard-user"></i> Structured Learning Curriculum</div>
+<div class="section-title" id="learning"><i class="fas fa-graduation-cap"></i> Structured Learning Curriculum — From Zero to Hero</div>
 <div class="path-container">
-    <div class="path-card"><h4><i class="fas fa-seedling"></i> Stage 1: Fundamentals</h4><ul><li>✓ Linux CLI & Bash</li><li>✓ Python automation</li><li>✓ Networking basics</li><li>✓ Web technologies</li></ul></div>
-    <div class="path-card"><h4><i class="fas fa-code"></i> Stage 2: Web & Crypto</h4><ul><li>✓ OWASP Top 10</li><li>✓ SQLi & XSS labs</li><li>✓ Classical & modern crypto</li><li>✓ JWT attacks</li></ul></div>
-    <div class="path-card"><h4><i class="fas fa-microchip"></i> Stage 3: Binary & Reverse</h4><ul><li>✓ x86/x64 assembly</li><li>✓ Buffer overflows & ROP</li><li>✓ Ghidra & gdb</li><li>✓ Crackmes challenges</li></ul></div>
-    <div class="path-card"><h4><i class="fas fa-search"></i> Stage 4: Forensics + Cloud</h4><ul><li>✓ PCAP analysis</li><li>✓ Memory forensics</li><li>✓ Steganography tools</li><li>✓ AWS/container basics</li></ul></div>
+    <div class="path-card"><h4><i class="fas fa-seedling"></i> Stage 1: Fundamentals</h4><ul><li><i class="fas fa-check-circle"></i> Linux CLI & Bash scripting</li><li><i class="fas fa-check-circle"></i> Python for automation (requests, pwntools)</li><li><i class="fas fa-check-circle"></i> Networking basics (TCP/IP, DNS, HTTP)</li><li><i class="fas fa-check-circle"></i> Web technologies (HTML, JS, cookies)</li><li><i class="fas fa-check-circle"></i> Basic cryptography concepts</li></ul></div>
+    <div class="path-card"><h4><i class="fas fa-code"></i> Stage 2: Web & Crypto</h4><ul><li><i class="fas fa-check-circle"></i> OWASP Top 10 practical labs</li><li><i class="fas fa-check-circle"></i> SQL injection manual & sqlmap</li><li><i class="fas fa-check-circle"></i> XSS & CSRF exploitation</li><li><i class="fas fa-check-circle"></i> Classical & modern crypto attacks</li><li><i class="fas fa-check-circle"></i> JWT / OAuth attacks</li></ul></div>
+    <div class="path-card"><h4><i class="fas fa-microchip"></i> Stage 3: Binary & Reverse</h4><ul><li><i class="fas fa-check-circle"></i> x86/x64 assembly basics (registers, stack)</li><li><i class="fas fa-check-circle"></i> Buffer overflows & ROP chain crafting</li><li><i class="fas fa-check-circle"></i> Ghidra & gdb/Pwndbg</li><li><i class="fas fa-check-circle"></i> Heap exploitation fundamentals</li><li><i class="fas fa-check-circle"></i> Crackmes & CTF pwn challenges</li></ul></div>
+    <div class="path-card"><h4><i class="fas fa-search"></i> Stage 4: Forensics + Cloud</h4><ul><li><i class="fas fa-check-circle"></i> PCAP analysis with Wireshark</li><li><i class="fas fa-check-circle"></i> Memory forensics (Volatility)</li><li><i class="fas fa-check-circle"></i> Steganography tools (zsteg, steghide)</li><li><i class="fas fa-check-circle"></i> AWS/GCP/container basics</li><li><i class="fas fa-check-circle"></i> Practice on VulnHub & HTB</li></ul></div>
 </div>
 
-<!-- ========= STATS ========= -->
+<!-- ========= STATS BAR ========= -->
 <div class="stats-bar">
-    <div class="stat-item"><div class="stat-number">🔓</div>100% Free</div>
-    <div class="stat-item"><div class="stat-number">8</div>Domains</div>
-    <div class="stat-item"><div class="stat-number">50+</div>Tools</div>
-    <div class="stat-item"><div class="stat-number">100+</div>Concepts</div>
+    <div class="stat-item"><div class="stat-number">100%</div>Free & Open</div>
+    <div class="stat-item"><div class="stat-number">8</div>Core Domains</div>
+    <div class="stat-item"><div class="stat-number">50+</div>Essential Tools</div>
+    <div class="stat-item"><div class="stat-number">100+</div>Attack Concepts</div>
+    <div class="stat-item"><div class="stat-number">4</div>Learning Stages</div>
 </div>
 
 <!-- ========= RESOURCES ========= -->
-<div class="section-title" id="resources"><i class="fas fa-folder-tree"></i> Curated Learning Resources</div>
+<div class="section-title" id="resources"><i class="fas fa-folder-tree"></i> Curated External Resources — Practice Platforms & Reading</div>
 <div class="resource-grid">
-    <div class="resource-card"><a href="https://ctf101.org/" target="_blank"><i class="fas fa-book"></i> CTF 101 — Full beginner guide</a></div>
-    <div class="resource-card"><a href="https://overthewire.org/wargames/" target="_blank"><i class="fas fa-terminal"></i> OverTheWire (Bandit, Leviathan)</a></div>
-    <div class="resource-card"><a href="https://picoctf.org/" target="_blank"><i class="fas fa-flag-checkered"></i> picoCTF — Year-round practice</a></div>
-    <div class="resource-card"><a href="https://portswigger.net/web-security" target="_blank"><i class="fas fa-shield-virus"></i> PortSwigger Web Academy</a></div>
-    <div class="resource-card"><a href="https://exploit.education/" target="_blank"><i class="fas fa-bug"></i> Exploit Education</a></div>
-    <div class="resource-card"><a href="https://crackmes.one/" target="_blank"><i class="fas fa-microchip"></i> Crackmes.one — RE challenges</a></div>
-    <div class="resource-card"><a href="https://www.vulnhub.com/" target="_blank"><i class="fas fa-database"></i> VulnHub — Boot2root VMs</a></div>
-    <div class="resource-card"><a href="https://github.com/apsdehal/awesome-ctf" target="_blank"><i class="fab fa-github"></i> Awesome CTF (GitHub mega list)</a></div>
-    <div class="resource-card"><a href="https://gchq.github.io/CyberChef/" target="_blank"><i class="fas fa-cogs"></i> CyberChef (must-have)</a></div>
-    <div class="resource-card"><a href="https://exploit-db.com/" target="_blank"><i class="fas fa-database"></i> Exploit-DB</a></div>
-    <div class="resource-card"><a href="https://crackstation.net/" target="_blank"><i class="fas fa-key"></i> CrackStation — Hash lookup</a></div>
-    <div class="resource-card"><a href="https://regex101.com/" target="_blank"><i class="fas fa-code"></i> Regex101 — regex debugger</a></div>
+    <div class="resource-card"><a href="https://ctf101.org/" target="_blank"><i class="fas fa-book-open"></i> CTF 101 — Free complete beginner's book</a></div>
+    <div class="resource-card"><a href="https://overthewire.org/wargames/" target="_blank"><i class="fas fa-terminal"></i> OverTheWire (Bandit → Leviathan → Narnia)</a></div>
+    <div class="resource-card"><a href="https://picoctf.org/" target="_blank"><i class="fas fa-flag-checkered"></i> picoCTF — Year-round beginner practice</a></div>
+    <div class="resource-card"><a href="https://portswigger.net/web-security" target="_blank"><i class="fas fa-shield-virus"></i> PortSwigger Web Security Academy (free labs)</a></div>
+    <div class="resource-card"><a href="https://exploit.education/" target="_blank"><i class="fas fa-bug"></i> Exploit Education — Phoenix, Nebula, Fusion</a></div>
+    <div class="resource-card"><a href="https://crackmes.one/" target="_blank"><i class="fas fa-microchip"></i> Crackmes.one — Reverse engineering challenges</a></div>
+    <div class="resource-card"><a href="https://www.vulnhub.com/" target="_blank"><i class="fas fa-database"></i> VulnHub — Boot2root virtual machines</a></div>
+    <div class="resource-card"><a href="https://github.com/apsdehal/awesome-ctf" target="_blank"><i class="fab fa-github"></i> Awesome CTF — GitHub mega resource list</a></div>
+    <div class="resource-card"><a href="https://gchq.github.io/CyberChef/" target="_blank"><i class="fas fa-cogs"></i> CyberChef — The cyber Swiss army knife</a></div>
+    <div class="resource-card"><a href="https://exploit-db.com/" target="_blank"><i class="fas fa-database"></i> Exploit-DB — Archive of exploits & shellcode</a></div>
+    <div class="resource-card"><a href="https://crackstation.net/" target="_blank"><i class="fas fa-key"></i> CrackStation — Free hash lookup database</a></div>
+    <div class="resource-card"><a href="https://regex101.com/" target="_blank"><i class="fas fa-code"></i> Regex101 — Real-time regex debugger</a></div>
 </div>
 
 <footer>
-    <i class="fas fa-brain"></i> AIAC CTF WIKIPEDIA — The most comprehensive static CTF training library. No accounts, no backends, just knowledge.
-    <p style="margin-top: 0.5rem;">📌 All examples are illustrative. Attack schemas and tools are for educational purposes only.</p>
+    <i class="fas fa-brain"></i> AIAC CTF WIKIPEDIA — The most comprehensive static CTF training library on the web.
+    <p style="margin-top: 0.8rem;">📌 All examples are for educational purposes. Attack schemas and techniques are intended to improve cybersecurity defense awareness.</p>
+    <p style="margin-top: 0.5rem;">🔓 100% free, no accounts, no tracking, no backend — pure knowledge for the community.</p>
 </footer>
 
 <script>
-    // smooth anchor scrolling
-    document.querySelectorAll('.nav-links a, .mini-card').forEach(anchor => {
-        anchor.addEventListener('click', function(e) {
+    document.querySelectorAll('.nav-links a, .mini-card').forEach(el => {
+        el.addEventListener('click', function(e) {
             let href = this.getAttribute('href');
-            if(!href && this.onclick) return;
-            if(href && href.startsWith('#')) {
+            if (!href && this.onclick) {
+                let targetId = this.getAttribute('onclick')?.match(/'([^']+)'/);
+                if (targetId) href = '#' + targetId[1];
+            }
+            if (href && href.startsWith('#')) {
                 e.preventDefault();
-                const targetId = href.substring(1);
-                const target = document.getElementById(targetId);
-                if(target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                const target = document.getElementById(href.substring(1));
+                if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
             }
         });
     });
-    console.log("AIAC CTF Wikipedia — Complete training library loaded.");
+    console.log("AIAC CTF WIKIPEDIA — Enhanced verbose training library loaded.");
 </script>
 </body>
 </html>
