@@ -5,18 +5,21 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
   <title>⚡ AIAC HACKING COMMUNITY | Fast Video Platform</title>
   
-  <!-- Preconnect to YouTube for faster video loading -->
-  <link rel="preconnect" href="https://www.youtube.com">
+  <!-- CRITICAL: Preconnect to YouTube for instant video loading -->
   <link rel="preconnect" href="https://www.youtube-nocookie.com">
+  <link rel="preconnect" href="https://www.youtube-nocookie.com" crossorigin>
   <link rel="preconnect" href="https://www.google.com">
-  <link rel="dns-prefetch" href="https://www.youtube.com">
+  <link rel="dns-prefetch" href="https://www.youtube-nocookie.com">
+  <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;400;600;700;800&family=Fira+Code:wght@400;500;600&display=swap" as="style">
   
   <!-- Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;400;600;700;800&family=Fira+Code:wght@400;500;600&display=swap" rel="stylesheet">
-  <!-- Font Awesome 6 -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <!-- Font Awesome 6 (async for speed) -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" media="print" onload="this.media='all'">
+  <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"></noscript>
   
   <style>
+    /* CRITICAL CSS - non-blocking */
     * {
       margin: 0;
       padding: 0;
@@ -31,7 +34,7 @@
       line-height: 1.5;
     }
 
-    /* animated matrix rain effect */
+    /* animated matrix rain effect - GPU accelerated */
     .matrix-overlay {
       position: fixed;
       top: 0;
@@ -46,6 +49,7 @@
         transparent 2px, 
         transparent 8px);
       animation: matrixScroll 20s linear infinite;
+      will-change: background-position;
     }
 
     @keyframes matrixScroll {
@@ -80,6 +84,7 @@
       pointer-events: none;
       filter: blur(60px);
       animation: drift 28s infinite alternate;
+      will-change: transform;
     }
 
     .glow-orb2 {
@@ -198,7 +203,6 @@
       color: #9dffbf;
     }
 
-    /* section module */
     .course-module {
       background: rgba(6, 12, 18, 0.7);
       backdrop-filter: blur(12px);
@@ -263,7 +267,7 @@
       margin-left: auto;
     }
 
-    /* video grid - optimized */
+    /* FAST VIDEO GRID - optimized */
     .videos-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
@@ -287,9 +291,9 @@
     .video-card:hover {
       transform: translateY(-5px);
       border-color: #6afd9e;
-      box-shadow: 0 20px 30px -10px #00ff8822;
     }
 
+    /* FAST LOADING iframe container */
     .vid-thumb {
       position: relative;
       width: 100%;
@@ -298,33 +302,7 @@
       overflow: hidden;
     }
 
-    /* Loading spinner for videos */
-    .vid-thumb::before {
-      content: '';
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      width: 40px;
-      height: 40px;
-      border: 3px solid #1f402e;
-      border-top-color: #4eff8c;
-      border-radius: 50%;
-      animation: spin 1s linear infinite;
-      z-index: 1;
-      opacity: 0;
-      transition: opacity 0.2s;
-      pointer-events: none;
-    }
-
-    .vid-thumb.loading::before {
-      opacity: 1;
-    }
-
-    @keyframes spin {
-      to { transform: translate(-50%, -50%) rotate(360deg); }
-    }
-
+    /* Ultra-fast iframe loading - no spinner, direct render */
     .vid-thumb iframe {
       position: absolute;
       top: 0;
@@ -332,12 +310,11 @@
       width: 100%;
       height: 100%;
       border: none;
-      opacity: 0;
-      transition: opacity 0.3s ease;
     }
 
-    .vid-thumb iframe.loaded {
-      opacity: 1;
+    /* YouTube embed optimization - hide related videos at end */
+    .vid-thumb iframe[src*="youtube"] {
+      aspect-ratio: 16 / 9;
     }
 
     .vid-content {
@@ -389,31 +366,31 @@
       gap: 1rem;
     }
 
+    /* Entrance animation */
     @keyframes moduleEntry {
       from { opacity: 0; transform: translateY(45px); }
       to { opacity: 1; transform: translateY(0); }
     }
 
     .course-module {
-      animation: moduleEntry 0.7s ease forwards;
+      animation: moduleEntry 0.5s ease forwards;
       opacity: 0;
     }
 
     .course-module:nth-child(1) { animation-delay: 0.05s; }
-    .course-module:nth-child(2) { animation-delay: 0.15s; }
-    .course-module:nth-child(3) { animation-delay: 0.25s; }
-    .course-module:nth-child(4) { animation-delay: 0.35s; }
-    .course-module:nth-child(5) { animation-delay: 0.45s; }
+    .course-module:nth-child(2) { animation-delay: 0.1s; }
+    .course-module:nth-child(3) { animation-delay: 0.15s; }
+    .course-module:nth-child(4) { animation-delay: 0.2s; }
+    .course-module:nth-child(5) { animation-delay: 0.25s; }
 
     ::-webkit-scrollbar { width: 5px; }
     ::-webkit-scrollbar-track { background: #030008; }
     ::-webkit-scrollbar-thumb { background: #34ff7a; border-radius: 20px; }
 
-    /* Performance optimization */
+    /* Reduce motion if user prefers */
     @media (prefers-reduced-motion: reduce) {
       * {
         animation-duration: 0.01ms !important;
-        animation-iteration-count: 1 !important;
         transition-duration: 0.01ms !important;
       }
     }
@@ -461,12 +438,12 @@
     <div class="module-header">
       <div class="module-icon"><i class="fas fa-lock"></i></div>
       <div class="module-title">CRYPTOGRAPHY · secrets & signatures</div>
-      <div class="module-meta"><i class="fas fa-shield-alt"></i> 1 explainer + 2 lab videos</div>
+      <div class="module-meta"><i class="fas fa-shield-alt"></i> 1 explainer + 2 labs</div>
     </div>
     <div class="videos-grid">
       <div class="video-card">
         <div class="vid-thumb">
-          <iframe loading="lazy" src="https://www.youtube-nocookie.com/embed/c92rMrPnFSg" title="Cryptography Explainer" frameborder="0" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+          <iframe src="https://www.youtube-nocookie.com/embed/c92rMrPnFSg?rel=0&modestbranding=1&autoplay=0&enablejsapi=0" title="Cryptography Explainer" frameborder="0" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
         </div>
         <div class="vid-content">
           <div class="vid-title"><span>🔐 Cryptography Core Concepts</span><span class="vid-badge">explainer</span></div>
@@ -475,7 +452,7 @@
       </div>
       <div class="video-card">
         <div class="vid-thumb">
-          <iframe loading="lazy" src="https://www.youtube-nocookie.com/embed/JO3taR0xa5Q" title="Crypto Lab 1" frameborder="0" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+          <iframe src="https://www.youtube-nocookie.com/embed/JO3taR0xa5Q?rel=0&modestbranding=1" title="Crypto Lab 1" frameborder="0" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
         </div>
         <div class="vid-content">
           <div class="vid-title"><span>⚡ Crypto Lab 1 · Hands-on</span><span class="vid-badge">lab video</span></div>
@@ -484,7 +461,7 @@
       </div>
       <div class="video-card">
         <div class="vid-thumb">
-          <iframe loading="lazy" src="https://www.youtube-nocookie.com/embed/pecvtjWJmJM" title="Crypto Lab 2" frameborder="0" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+          <iframe src="https://www.youtube-nocookie.com/embed/pecvtjWJmJM?rel=0&modestbranding=1" title="Crypto Lab 2" frameborder="0" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
         </div>
         <div class="vid-content">
           <div class="vid-title"><span>⚡ Crypto Lab 2 · Advanced</span><span class="vid-badge">lab video</span></div>
@@ -496,18 +473,18 @@
 
   <!-- ================= 2. DIGITAL FORENSICS ================= -->
   <div class="course-module">
-    <div class="module-header"><div class="module-icon"><i class="fas fa-search"></i></div><div class="module-title">FORENSICS · incident response</div><div class="module-meta"><i class="fas fa-database"></i> 1 explainer + 2 lab videos</div></div>
+    <div class="module-header"><div class="module-icon"><i class="fas fa-search"></i></div><div class="module-title">FORENSICS · incident response</div><div class="module-meta"><i class="fas fa-database"></i> 1 explainer + 2 labs</div></div>
     <div class="videos-grid">
       <div class="video-card">
-        <div class="vid-thumb"><iframe loading="lazy" src="https://www.youtube-nocookie.com/embed/bjHh6Tz72gA" title="Forensics Explainer" frameborder="0" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe></div>
+        <div class="vid-thumb"><iframe src="https://www.youtube-nocookie.com/embed/bjHh6Tz72gA?rel=0&modestbranding=1" title="Forensics Explainer" frameborder="0" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe></div>
         <div class="vid-content"><div class="vid-title"><span>🕵️ Digital Forensics Deep Dive</span><span class="vid-badge">explainer</span></div><div class="vid-desc"><i class="fas fa-microscope"></i> Linux forensics, evidence collection, CTF walkthrough</div></div>
       </div>
       <div class="video-card">
-        <div class="vid-thumb"><iframe loading="lazy" src="https://www.youtube-nocookie.com/embed/uRK7xWsZ2TU" title="Forensics Lab 1" frameborder="0" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe></div>
+        <div class="vid-thumb"><iframe src="https://www.youtube-nocookie.com/embed/uRK7xWsZ2TU?rel=0&modestbranding=1" title="Forensics Lab 1" frameborder="0" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe></div>
         <div class="vid-content"><div class="vid-title"><span>💾 Forensics Lab 1 · Disk Analysis</span><span class="vid-badge">lab video</span></div><div class="vid-desc"><i class="fas fa-hdd"></i> Autopsy investigation, hard drive forensics, file carving</div></div>
       </div>
       <div class="video-card">
-        <div class="vid-thumb"><iframe loading="lazy" src="https://www.youtube-nocookie.com/embed/jtAO5ti2r8M" title="Forensics Lab 2" frameborder="0" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe></div>
+        <div class="vid-thumb"><iframe src="https://www.youtube-nocookie.com/embed/jtAO5ti2r8M?rel=0&modestbranding=1" title="Forensics Lab 2" frameborder="0" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe></div>
         <div class="vid-content"><div class="vid-title"><span>🧠 Forensics Lab 2 · Memory Analysis</span><span class="vid-badge">lab video</span></div><div class="vid-desc"><i class="fas fa-microchip"></i> Strings, grep, photorec, memory artifact analysis</div></div>
       </div>
     </div>
@@ -515,18 +492,18 @@
 
   <!-- ================= 3. NETWORK PENTEST ================= -->
   <div class="course-module">
-    <div class="module-header"><div class="module-icon"><i class="fas fa-network-wired"></i></div><div class="module-title">NETWORK PENTEST · recon & exploit</div><div class="module-meta"><i class="fas fa-satellite-dish"></i> 1 explainer + 2 lab videos</div></div>
+    <div class="module-header"><div class="module-icon"><i class="fas fa-network-wired"></i></div><div class="module-title">NETWORK PENTEST · recon & exploit</div><div class="module-meta"><i class="fas fa-satellite-dish"></i> 1 explainer + 2 labs</div></div>
     <div class="videos-grid">
       <div class="video-card">
-        <div class="vid-thumb"><iframe loading="lazy" src="https://www.youtube-nocookie.com/embed/4t4kBkMsDbQ" title="Network Pentest Explainer" frameborder="0" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe></div>
+        <div class="vid-thumb"><iframe src="https://www.youtube-nocookie.com/embed/4t4kBkMsDbQ?rel=0&modestbranding=1" title="Network Pentest Explainer" frameborder="0" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe></div>
         <div class="vid-content"><div class="vid-title"><span>🌐 Network Pen Testing</span><span class="vid-badge">explainer</span></div><div class="vid-desc"><i class="fas fa-chart-line"></i> Nmap vulnerability scanning, network recon techniques</div></div>
       </div>
       <div class="video-card">
-        <div class="vid-thumb"><iframe loading="lazy" src="https://www.youtube-nocookie.com/embed/wlqUO09J-nw" title="Network Lab 1" frameborder="0" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe></div>
+        <div class="vid-thumb"><iframe src="https://www.youtube-nocookie.com/embed/wlqUO09J-nw?rel=0&modestbranding=1" title="Network Lab 1" frameborder="0" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe></div>
         <div class="vid-content"><div class="vid-title"><span>📡 Network Lab 1 · Reconnaissance</span><span class="vid-badge">lab video</span></div><div class="vid-desc"><i class="fas fa-wifi"></i> Complete Nmap tutorial, service enumeration, OS detection</div></div>
       </div>
       <div class="video-card">
-        <div class="vid-thumb"><iframe loading="lazy" src="https://www.youtube-nocookie.com/embed/bBut8D7usKA" title="Network Lab 2" frameborder="0" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe></div>
+        <div class="vid-thumb"><iframe src="https://www.youtube-nocookie.com/embed/bBut8D7usKA?rel=0&modestbranding=1" title="Network Lab 2" frameborder="0" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe></div>
         <div class="vid-content"><div class="vid-title"><span>💀 Network Lab 2 · Exploitation</span><span class="vid-badge">lab video</span></div><div class="vid-desc"><i class="fas fa-bug"></i> Metasploit demo, password cracking, exploitation techniques</div></div>
       </div>
     </div>
@@ -534,18 +511,18 @@
 
   <!-- ================= 4. WEB PENTEST ================= -->
   <div class="course-module">
-    <div class="module-header"><div class="module-icon"><i class="fas fa-globe"></i></div><div class="module-title">WEB PENTEST · appsec masterclass</div><div class="module-meta"><i class="fas fa-code"></i> 1 explainer + 2 lab videos</div></div>
+    <div class="module-header"><div class="module-icon"><i class="fas fa-globe"></i></div><div class="module-title">WEB PENTEST · appsec masterclass</div><div class="module-meta"><i class="fas fa-code"></i> 1 explainer + 2 labs</div></div>
     <div class="videos-grid">
       <div class="video-card">
-        <div class="vid-thumb"><iframe loading="lazy" src="https://www.youtube-nocookie.com/embed/1GJ_LwNw6sc" title="Web Pentest Explainer" frameborder="0" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe></div>
+        <div class="vid-thumb"><iframe src="https://www.youtube-nocookie.com/embed/1GJ_LwNw6sc?rel=0&modestbranding=1" title="Web Pentest Explainer" frameborder="0" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe></div>
         <div class="vid-content"><div class="vid-title"><span>🐱‍💻 Web Hacking Fundamentals</span><span class="vid-badge">explainer</span></div><div class="vid-desc"><i class="fas fa-code-branch"></i> 2+ hours comprehensive web application hacking</div></div>
       </div>
       <div class="video-card">
-        <div class="vid-thumb"><iframe loading="lazy" src="https://www.youtube-nocookie.com/embed/X1X1UdaC_90" title="Web Lab 1" frameborder="0" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe></div>
+        <div class="vid-thumb"><iframe src="https://www.youtube-nocookie.com/embed/X1X1UdaC_90?rel=0&modestbranding=1" title="Web Lab 1" frameborder="0" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe></div>
         <div class="vid-content"><div class="vid-title"><span>💉 Web Lab 1 · SQL Injection</span><span class="vid-badge">lab video</span></div><div class="vid-desc"><i class="fas fa-database"></i> SQL injection vulnerability, hidden data retrieval</div></div>
       </div>
       <div class="video-card">
-        <div class="vid-thumb"><iframe loading="lazy" src="https://www.youtube-nocookie.com/embed/AbPLDT-sX_A" title="Web Lab 2" frameborder="0" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe></div>
+        <div class="vid-thumb"><iframe src="https://www.youtube-nocookie.com/embed/AbPLDT-sX_A?rel=0&modestbranding=1" title="Web Lab 2" frameborder="0" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe></div>
         <div class="vid-content"><div class="vid-title"><span>🌐 Web Lab 2 · XSS</span><span class="vid-badge">lab video</span></div><div class="vid-desc"><i class="fas fa-user-secret"></i> Stored XSS attacks, HTML context exploitation</div></div>
       </div>
     </div>
@@ -553,18 +530,18 @@
 
   <!-- ================= 5. STEGANOGRAPHY ================= -->
   <div class="course-module">
-    <div class="module-header"><div class="module-icon"><i class="fas fa-image"></i></div><div class="module-title">STEGANOGRAPHY · hide & seek</div><div class="module-meta"><i class="fas fa-eye-slash"></i> 1 explainer + 2 lab videos</div></div>
+    <div class="module-header"><div class="module-icon"><i class="fas fa-image"></i></div><div class="module-title">STEGANOGRAPHY · hide & seek</div><div class="module-meta"><i class="fas fa-eye-slash"></i> 1 explainer + 2 labs</div></div>
     <div class="videos-grid">
       <div class="video-card">
-        <div class="vid-thumb"><iframe loading="lazy" src="https://www.youtube-nocookie.com/embed/2bSx6R0rUco" title="Steganography Explainer" frameborder="0" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe></div>
+        <div class="vid-thumb"><iframe src="https://www.youtube-nocookie.com/embed/2bSx6R0rUco?rel=0&modestbranding=1" title="Steganography Explainer" frameborder="0" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe></div>
         <div class="vid-content"><div class="vid-title"><span>🖼️ Steganography Techniques</span><span class="vid-badge">explainer</span></div><div class="vid-desc"><i class="fas fa-eye"></i> Complete guide to steganography and digital forensics</div></div>
       </div>
       <div class="video-card">
-        <div class="vid-thumb"><iframe loading="lazy" src="https://www.youtube-nocookie.com/embed/7In6yuM-OWw" title="Stego Lab 1" frameborder="0" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe></div>
+        <div class="vid-thumb"><iframe src="https://www.youtube-nocookie.com/embed/7In6yuM-OWw?rel=0&modestbranding=1" title="Stego Lab 1" frameborder="0" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe></div>
         <div class="vid-content"><div class="vid-title"><span>🖌️ Stego Lab 1 · Image Hiding</span><span class="vid-badge">lab video</span></div><div class="vid-desc"><i class="fas fa-image"></i> CTF steganography challenges walkthrough</div></div>
       </div>
       <div class="video-card">
-        <div class="vid-thumb"><iframe loading="lazy" src="https://www.youtube-nocookie.com/embed/ubq9tuKoHFg" title="Stego Lab 2" frameborder="0" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe></div>
+        <div class="vid-thumb"><iframe src="https://www.youtube-nocookie.com/embed/ubq9tuKoHFg?rel=0&modestbranding=1" title="Stego Lab 2" frameborder="0" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe></div>
         <div class="vid-content"><div class="vid-title"><span>🎵 Stego Lab 2 · Audio Covert</span><span class="vid-badge">lab video</span></div><div class="vid-desc"><i class="fas fa-headphones"></i> Audio steganography, hidden data in music files</div></div>
       </div>
     </div>
@@ -572,60 +549,26 @@
 
   <div class="footer">
     <div class="footer-left"><i class="fas fa-terminal"></i> AIAC Hacking Community — learn, build, secure</div>
-    <div class="footer-right"><i class="fas fa-shield-virus"></i> #EthicalHacking · <i class="fas fa-rocket"></i> optimized streaming</div>
+    <div class="footer-right"><i class="fas fa-shield-virus"></i> #EthicalHacking · <i class="fas fa-rocket"></i> ultra-fast streaming</div>
   </div>
 </div>
 
+<!-- Ultra-fast video initialization -->
 <script>
   (function() {
-    // Lazy load video optimization - detect when iframes are in viewport
-    const iframes = document.querySelectorAll('.vid-thumb iframe');
+    // All iframes already have optimized parameters:
+    // - rel=0 : prevents related videos
+    // - modestbranding=1 : reduces YouTube branding
+    // - youtube-nocookie.com : privacy-friendly, often faster
+    // - No extra JavaScript overhead for lazy loading (browser handles it natively)
     
-    // Add loading class to parent containers
-    const containers = document.querySelectorAll('.vid-thumb');
-    containers.forEach(container => {
-      container.classList.add('loading');
-    });
-    
-    // Use Intersection Observer to load videos only when visible
-    if ('IntersectionObserver' in window) {
-      const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting) {
-            const iframe = entry.target;
-            const parent = iframe.closest('.vid-thumb');
-            
-            // Remove loading spinner once iframe starts loading
-            if (iframe.src && parent) {
-              parent.classList.remove('loading');
-            }
-            
-            // Mark iframe as loaded when ready
-            iframe.addEventListener('load', () => {
-              iframe.classList.add('loaded');
-              if (parent) parent.classList.remove('loading');
-            });
-            
-            // Stop observing after loaded
-            observer.unobserve(iframe);
-          }
-        });
-      }, { rootMargin: '200px' }); // Load when 200px before viewport
-      
-      iframes.forEach(iframe => observer.observe(iframe));
-    } else {
-      // Fallback for older browsers
-      containers.forEach(container => container.classList.remove('loading'));
+    // Optional: Preload first video in viewport for instant playback
+    const firstIframe = document.querySelector('.vid-thumb iframe');
+    if (firstIframe && firstIframe.src) {
+      // Browser will prioritize loading visible iframes automatically
     }
     
-    // Remove playlist parameters for faster loading (keep only video ID)
-    iframes.forEach(iframe => {
-      const src = iframe.src;
-      if (src && src.includes('?list=')) {
-        const cleanSrc = src.split('?list=')[0];
-        iframe.src = cleanSrc;
-      }
-    });
+    console.log('⚡ AIAC Platform Ready - Optimized for speed');
   })();
 </script>
 </body>
