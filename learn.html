@@ -99,6 +99,41 @@
       z-index: 5;
     }
 
+    /* home link ribbon */
+    .home-ribbon {
+      position: fixed;
+      top: 20px;
+      left: 20px;
+      z-index: 100;
+      background: rgba(0, 20, 10, 0.85);
+      backdrop-filter: blur(12px);
+      padding: 8px 18px;
+      border-radius: 40px;
+      border: 1px solid #3eff8e70;
+      transition: all 0.3s ease;
+      font-family: 'Fira Code', monospace;
+      font-size: 0.85rem;
+      cursor: pointer;
+    }
+    .home-ribbon a {
+      color: #abffcd;
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 500;
+    }
+    .home-ribbon:hover {
+      background: #0f2a1f;
+      border-color: #7effaa;
+      transform: translateX(3px);
+      box-shadow: 0 0 12px #00ff7f40;
+    }
+    .home-ribbon i {
+      font-size: 1rem;
+      color: #4eff8c;
+    }
+
     .hero {
       text-align: center;
       margin-bottom: 3.5rem;
@@ -444,10 +479,20 @@
       .module-title { font-size: 1.3rem; }
       .module-meta { margin-left: 0; margin-top: 5px; }
       .labs-row { grid-template-columns: 1fr; }
+      .home-ribbon { top: 12px; left: 12px; padding: 5px 12px; font-size: 0.7rem;}
     }
   </style>
 </head>
 <body>
+
+<!-- FIXED LINK TO ORIGINAL PAGE (index.html) -->
+<div class="home-ribbon">
+  <a href="index.html">
+    <i class="fas fa-house-chimney"></i> 
+    <span>⌂ BACK TO HOME / INDEX</span>
+    <i class="fas fa-arrow-right"></i>
+  </a>
+</div>
 
 <div class="matrix-overlay"></div>
 <div class="cyber-grid"></div>
@@ -555,7 +600,7 @@
 
 <script>
   (function() {
-    console.log("%c[AIAC] Welcome hackers! Each lab = video placeholder + detailed guide for installations & practice.", "color:#4eff8c; font-size:13px; font-family:monospace");
+    console.log("%c[AIAC] Home link ready → index.html | Community-driven hacking platform", "color:#4eff8c; font-size:13px; font-family:monospace");
   })();
 </script>
 </body>
