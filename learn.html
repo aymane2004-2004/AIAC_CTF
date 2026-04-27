@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-  <title>⚡ AIAC HACKING COMMUNITY | Video Labs</title>
+  <title>⚡ AIAC HACKING COMMUNITY | Video Platform</title>
   <!-- Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;400;600;700;800&family=Fira+Code:wght@400;500;600&display=swap" rel="stylesheet">
   <!-- Font Awesome 6 -->
@@ -255,10 +255,10 @@
       margin-left: auto;
     }
 
-    /* video grid for both explainer and labs */
+    /* video grid */
     .videos-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
       gap: 1.8rem;
       margin-top: 0.5rem;
     }
@@ -286,7 +286,7 @@
       position: relative;
       width: 100%;
       padding-bottom: 56.25%;
-      background: linear-gradient(135deg, #0a1118, #02070c);
+      background: #02080c;
     }
 
     .vid-thumb iframe {
@@ -296,49 +296,6 @@
       width: 100%;
       height: 100%;
       border: none;
-    }
-
-    /* empty video placeholder for labs (no content yet) */
-    .empty-video {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      background: radial-gradient(circle at center, #0d241b, #020a0f);
-      font-family: 'Fira Code', monospace;
-      gap: 12px;
-      color: #74ffaa;
-    }
-
-    .empty-video i {
-      font-size: 3rem;
-      opacity: 0.8;
-      text-shadow: 0 0 10px #0f0;
-      animation: softPulse 2s infinite;
-    }
-
-    @keyframes softPulse {
-      0% { opacity: 0.5; transform: scale(0.98);}
-      100% { opacity: 1; transform: scale(1.05);}
-    }
-
-    .empty-video span {
-      font-size: 0.85rem;
-      background: #1f2f2670;
-      padding: 5px 12px;
-      border-radius: 40px;
-      font-weight: 500;
-      letter-spacing: 1px;
-    }
-
-    .empty-video small {
-      font-size: 0.65rem;
-      opacity: 0.7;
     }
 
     .vid-content {
@@ -375,16 +332,6 @@
       display: flex;
       align-items: center;
       gap: 6px;
-    }
-
-    .section-label {
-      display: inline-block;
-      background: #0f2a1faa;
-      font-size: 0.7rem;
-      padding: 0.2rem 0.8rem;
-      border-radius: 20px;
-      margin-bottom: 0.8rem;
-      font-family: monospace;
     }
 
     .footer {
@@ -456,9 +403,6 @@
       <span><i class="fas fa-flask"></i> 10 hands‑on lab videos</span>
       <span><i class="fas fa-heart"></i> #AIAC_Hackers</span>
     </div>
-    <div style="margin-top: 12px; font-size:0.8rem; background: #0e1a16a0; display: inline-block; padding: 5px 18px; border-radius:60px;">
-      <i class="fas fa-video"></i> each lab = full video tutorial — add your content
-    </div>
   </div>
 
   <!-- ================= 1. CRYPTOGRAPHY ================= -->
@@ -469,20 +413,35 @@
       <div class="module-meta"><i class="fas fa-shield-alt"></i> 1 explainer + 2 lab videos</div>
     </div>
     <div class="videos-grid">
-      <!-- Explainer video -->
+      <!-- Explainer video - add your URL here -->
       <div class="video-card">
-        <div class="vid-thumb"><iframe src="https://www.youtube.com/embed/jrmtmTAAhKk" title="crypto explainer" allowfullscreen></iframe></div>
-        <div class="vid-content"><div class="vid-title"><span>🔐 Cryptography Core Concepts</span><span class="vid-badge">explainer</span></div><div class="vid-desc"><i class="fas fa-chalkboard"></i> Symmetric, Asymmetric, Hashing & real-world crypto</div></div>
+        <div class="vid-thumb">
+          <iframe src="" title="Cryptography Explainer" allowfullscreen></iframe>
+        </div>
+        <div class="vid-content">
+          <div class="vid-title"><span>🔐 Cryptography Core Concepts</span><span class="vid-badge">explainer</span></div>
+          <div class="vid-desc"><i class="fas fa-chalkboard"></i> Symmetric, Asymmetric, Hashing & real-world crypto</div>
+        </div>
       </div>
-      <!-- LAB 1 video (empty) -->
+      <!-- LAB 1 video - add your URL here -->
       <div class="video-card">
-        <div class="vid-thumb"><div class="empty-video"><i class="fas fa-video-slash"></i><span>LAB 1 VIDEO</span><small>cryptography lab · add your content</small></div></div>
-        <div class="vid-content"><div class="vid-title"><span>⚡ Crypto Lab 1 · Hands-on</span><span class="vid-badge">lab video</span></div><div class="vid-desc"><i class="fas fa-flask"></i> Practical cryptography exercises — video coming soon</div></div>
+        <div class="vid-thumb">
+          <iframe src="" title="Cryptography Lab 1" allowfullscreen></iframe>
+        </div>
+        <div class="vid-content">
+          <div class="vid-title"><span>⚡ Crypto Lab 1 · Hands-on</span><span class="vid-badge">lab video</span></div>
+          <div class="vid-desc"><i class="fas fa-flask"></i> Practical cryptography exercises</div>
+        </div>
       </div>
-      <!-- LAB 2 video (empty) -->
+      <!-- LAB 2 video - add your URL here -->
       <div class="video-card">
-        <div class="vid-thumb"><div class="empty-video"><i class="fas fa-video-slash"></i><span>LAB 2 VIDEO</span><small>advanced crypto lab · add your content</small></div></div>
-        <div class="vid-content"><div class="vid-title"><span>⚡ Crypto Lab 2 · Advanced</span><span class="vid-badge">lab video</span></div><div class="vid-desc"><i class="fas fa-flask"></i> Real-world encryption attacks — video coming soon</div></div>
+        <div class="vid-thumb">
+          <iframe src="" title="Cryptography Lab 2" allowfullscreen></iframe>
+        </div>
+        <div class="vid-content">
+          <div class="vid-title"><span>⚡ Crypto Lab 2 · Advanced</span><span class="vid-badge">lab video</span></div>
+          <div class="vid-desc"><i class="fas fa-flask"></i> Real-world encryption attacks</div>
+        </div>
       </div>
     </div>
   </div>
@@ -491,9 +450,18 @@
   <div class="course-module">
     <div class="module-header"><div class="module-icon"><i class="fas fa-search"></i></div><div class="module-title">FORENSICS · incident response</div><div class="module-meta"><i class="fas fa-database"></i> 1 explainer + 2 lab videos</div></div>
     <div class="videos-grid">
-      <div class="video-card"><div class="vid-thumb"><iframe src="https://www.youtube.com/embed/BDhLhgVhApQ" title="forensics" allowfullscreen></iframe></div><div class="vid-content"><div class="vid-title"><span>🕵️ Digital Forensics Deep Dive</span><span class="vid-badge">explainer</span></div><div class="vid-desc"><i class="fas fa-microscope"></i> Evidence collection, memory forensics & timeline</div></div></div>
-      <div class="video-card"><div class="vid-thumb"><div class="empty-video"><i class="fas fa-video-slash"></i><span>LAB 1 VIDEO</span><small>forensics imaging lab</small></div></div><div class="vid-content"><div class="vid-title"><span>💾 Forensics Lab 1 · Disk Analysis</span><span class="vid-badge">lab video</span></div><div class="vid-desc"><i class="fas fa-hdd"></i> Autopsy, file carving — video coming soon</div></div></div>
-      <div class="video-card"><div class="vid-thumb"><div class="empty-video"><i class="fas fa-video-slash"></i><span>LAB 2 VIDEO</span><small>memory forensics lab</small></div></div><div class="vid-content"><div class="vid-title"><span>🧠 Forensics Lab 2 · Memory Analysis</span><span class="vid-badge">lab video</span></div><div class="vid-desc"><i class="fas fa-microchip"></i> Volatility framework, RAM dumps — coming soon</div></div></div>
+      <div class="video-card">
+        <div class="vid-thumb"><iframe src="" title="Digital Forensics Explainer" allowfullscreen></iframe></div>
+        <div class="vid-content"><div class="vid-title"><span>🕵️ Digital Forensics Deep Dive</span><span class="vid-badge">explainer</span></div><div class="vid-desc"><i class="fas fa-microscope"></i> Evidence collection, memory forensics & timeline</div></div>
+      </div>
+      <div class="video-card">
+        <div class="vid-thumb"><iframe src="" title="Forensics Lab 1" allowfullscreen></iframe></div>
+        <div class="vid-content"><div class="vid-title"><span>💾 Forensics Lab 1 · Disk Analysis</span><span class="vid-badge">lab video</span></div><div class="vid-desc"><i class="fas fa-hdd"></i> Autopsy, file carving, disk forensics</div></div>
+      </div>
+      <div class="video-card">
+        <div class="vid-thumb"><iframe src="" title="Forensics Lab 2" allowfullscreen></iframe></div>
+        <div class="vid-content"><div class="vid-title"><span>🧠 Forensics Lab 2 · Memory Analysis</span><span class="vid-badge">lab video</span></div><div class="vid-desc"><i class="fas fa-microchip"></i> Volatility framework, RAM dumps analysis</div></div>
+      </div>
     </div>
   </div>
 
@@ -501,9 +469,18 @@
   <div class="course-module">
     <div class="module-header"><div class="module-icon"><i class="fas fa-network-wired"></i></div><div class="module-title">NETWORK PENTEST · recon & exploit</div><div class="module-meta"><i class="fas fa-satellite-dish"></i> 1 explainer + 2 lab videos</div></div>
     <div class="videos-grid">
-      <div class="video-card"><div class="vid-thumb"><iframe src="https://www.youtube.com/embed/2ksuNZBRB0A" title="network pentest" allowfullscreen></iframe></div><div class="vid-content"><div class="vid-title"><span>🌐 Network Pen Testing</span><span class="vid-badge">explainer</span></div><div class="vid-desc"><i class="fas fa-chart-line"></i> Nmap, Metasploit, pivoting & privilege escalation</div></div></div>
-      <div class="video-card"><div class="vid-thumb"><div class="empty-video"><i class="fas fa-video-slash"></i><span>LAB 1 VIDEO</span><small>network scanning lab</small></div></div><div class="vid-content"><div class="vid-title"><span>📡 Network Lab 1 · Reconnaissance</span><span class="vid-badge">lab video</span></div><div class="vid-desc"><i class="fas fa-wifi"></i> Advanced Nmap, service enumeration — coming soon</div></div></div>
-      <div class="video-card"><div class="vid-thumb"><div class="empty-video"><i class="fas fa-video-slash"></i><span>LAB 2 VIDEO</span><small>exploitation lab</small></div></div><div class="vid-content"><div class="vid-title"><span>💀 Network Lab 2 · Exploitation</span><span class="vid-badge">lab video</span></div><div class="vid-desc"><i class="fas fa-bug"></i> Metasploit, privilege escalation — coming soon</div></div></div>
+      <div class="video-card">
+        <div class="vid-thumb"><iframe src="" title="Network Pentest Explainer" allowfullscreen></iframe></div>
+        <div class="vid-content"><div class="vid-title"><span>🌐 Network Pen Testing</span><span class="vid-badge">explainer</span></div><div class="vid-desc"><i class="fas fa-chart-line"></i> Nmap, Metasploit, pivoting & privilege escalation</div></div>
+      </div>
+      <div class="video-card">
+        <div class="vid-thumb"><iframe src="" title="Network Lab 1" allowfullscreen></iframe></div>
+        <div class="vid-content"><div class="vid-title"><span>📡 Network Lab 1 · Reconnaissance</span><span class="vid-badge">lab video</span></div><div class="vid-desc"><i class="fas fa-wifi"></i> Advanced Nmap, service enumeration, OS detection</div></div>
+      </div>
+      <div class="video-card">
+        <div class="vid-thumb"><iframe src="" title="Network Lab 2" allowfullscreen></iframe></div>
+        <div class="vid-content"><div class="vid-title"><span>💀 Network Lab 2 · Exploitation</span><span class="vid-badge">lab video</span></div><div class="vid-desc"><i class="fas fa-bug"></i> Metasploit framework, privilege escalation</div></div>
+      </div>
     </div>
   </div>
 
@@ -511,9 +488,18 @@
   <div class="course-module">
     <div class="module-header"><div class="module-icon"><i class="fas fa-globe"></i></div><div class="module-title">WEB PENTEST · appsec masterclass</div><div class="module-meta"><i class="fas fa-code"></i> 1 explainer + 2 lab videos</div></div>
     <div class="videos-grid">
-      <div class="video-card"><div class="vid-thumb"><iframe src="https://www.youtube.com/embed/WmUY7bFfa4A" title="web pentest" allowfullscreen></iframe></div><div class="vid-content"><div class="vid-title"><span>🐱‍💻 Web Hacking Fundamentals</span><span class="vid-badge">explainer</span></div><div class="vid-desc"><i class="fas fa-code-branch"></i> SQLi, XSS, CSRF, IDOR real attack patterns</div></div></div>
-      <div class="video-card"><div class="vid-thumb"><div class="empty-video"><i class="fas fa-video-slash"></i><span>LAB 1 VIDEO</span><small>SQL injection lab</small></div></div><div class="vid-content"><div class="vid-title"><span>💉 Web Lab 1 · SQL Injection</span><span class="vid-badge">lab video</span></div><div class="vid-desc"><i class="fas fa-database"></i> Manual & automated SQLi techniques — coming soon</div></div></div>
-      <div class="video-card"><div class="vid-thumb"><div class="empty-video"><i class="fas fa-video-slash"></i><span>LAB 2 VIDEO</span><small>XSS & CSRF lab</small></div></div><div class="vid-content"><div class="vid-title"><span>🌐 Web Lab 2 · XSS & CSRF</span><span class="vid-badge">lab video</span></div><div class="vid-desc"><i class="fas fa-user-secret"></i> Cross-site scripting, request forgery — coming soon</div></div></div>
+      <div class="video-card">
+        <div class="vid-thumb"><iframe src="" title="Web Pentest Explainer" allowfullscreen></iframe></div>
+        <div class="vid-content"><div class="vid-title"><span>🐱‍💻 Web Hacking Fundamentals</span><span class="vid-badge">explainer</span></div><div class="vid-desc"><i class="fas fa-code-branch"></i> SQLi, XSS, CSRF, IDOR real attack patterns</div></div>
+      </div>
+      <div class="video-card">
+        <div class="vid-thumb"><iframe src="" title="Web Lab 1" allowfullscreen></iframe></div>
+        <div class="vid-content"><div class="vid-title"><span>💉 Web Lab 1 · SQL Injection</span><span class="vid-badge">lab video</span></div><div class="vid-desc"><i class="fas fa-database"></i> Manual & automated SQLi techniques</div></div>
+      </div>
+      <div class="video-card">
+        <div class="vid-thumb"><iframe src="" title="Web Lab 2" allowfullscreen></iframe></div>
+        <div class="vid-content"><div class="vid-title"><span>🌐 Web Lab 2 · XSS & CSRF</span><span class="vid-badge">lab video</span></div><div class="vid-desc"><i class="fas fa-user-secret"></i> Cross-site scripting, request forgery attacks</div></div>
+      </div>
     </div>
   </div>
 
@@ -521,22 +507,31 @@
   <div class="course-module">
     <div class="module-header"><div class="module-icon"><i class="fas fa-image"></i></div><div class="module-title">STEGANOGRAPHY · hide & seek</div><div class="module-meta"><i class="fas fa-eye-slash"></i> 1 explainer + 2 lab videos</div></div>
     <div class="videos-grid">
-      <div class="video-card"><div class="vid-thumb"><iframe src="https://www.youtube.com/embed/TWJhfkYLanU" title="stego" allowfullscreen></iframe></div><div class="vid-content"><div class="vid-title"><span>🖼️ Steganography Techniques</span><span class="vid-badge">explainer</span></div><div class="vid-desc"><i class="fas fa-eye"></i> LSB, audio embedding, detection & tools</div></div></div>
-      <div class="video-card"><div class="vid-thumb"><div class="empty-video"><i class="fas fa-video-slash"></i><span>LAB 1 VIDEO</span><small>image steganography lab</small></div></div><div class="vid-content"><div class="vid-title"><span>🖌️ Stego Lab 1 · Image Hiding</span><span class="vid-badge">lab video</span></div><div class="vid-desc"><i class="fas fa-image"></i> LSB techniques, steghide, zsteg — coming soon</div></div></div>
-      <div class="video-card"><div class="vid-thumb"><div class="empty-video"><i class="fas fa-video-slash"></i><span>LAB 2 VIDEO</span><small>audio steganography lab</small></div></div><div class="vid-content"><div class="vid-title"><span>🎵 Stego Lab 2 · Audio Covert</span><span class="vid-badge">lab video</span></div><div class="vid-desc"><i class="fas fa-headphones"></i> Spectral analysis, audio embedding — coming soon</div></div></div>
+      <div class="video-card">
+        <div class="vid-thumb"><iframe src="" title="Steganography Explainer" allowfullscreen></iframe></div>
+        <div class="vid-content"><div class="vid-title"><span>🖼️ Steganography Techniques</span><span class="vid-badge">explainer</span></div><div class="vid-desc"><i class="fas fa-eye"></i> LSB, audio embedding, detection & tools</div></div>
+      </div>
+      <div class="video-card">
+        <div class="vid-thumb"><iframe src="" title="Stego Lab 1" allowfullscreen></iframe></div>
+        <div class="vid-content"><div class="vid-title"><span>🖌️ Stego Lab 1 · Image Hiding</span><span class="vid-badge">lab video</span></div><div class="vid-desc"><i class="fas fa-image"></i> LSB techniques, steghide, zsteg, detection</div></div>
+      </div>
+      <div class="video-card">
+        <div class="vid-thumb"><iframe src="" title="Stego Lab 2" allowfullscreen></iframe></div>
+        <div class="vid-content"><div class="vid-title"><span>🎵 Stego Lab 2 · Audio Covert</span><span class="vid-badge">lab video</span></div><div class="vid-desc"><i class="fas fa-headphones"></i> Spectral analysis, audio embedding, steganalysis</div></div>
+      </div>
     </div>
   </div>
 
   <div class="footer">
     <div class="footer-left"><i class="fas fa-terminal"></i> AIAC Hacking Community — learn, build, secure</div>
-    <div class="footer-right"><i class="fas fa-shield-virus"></i> #EthicalHacking · <i class="fas fa-laptop-code"></i> 15 videos total (5 explainers + 10 labs)</div>
+    <div class="footer-right"><i class="fas fa-shield-virus"></i> #EthicalHacking · <i class="fas fa-laptop-code"></i> add your video links</div>
   </div>
 </div>
 
 <script>
   (function() {
-    console.log("%c[AIAC] All labs are video placeholders — add your own video URLs in the iframe src or replace empty-video divs with iframes.", "color:#4eff8c; font-size:13px; font-family:monospace");
-    console.log("%c[+] Home link → index.html | Each section: 1 explainer video + 2 lab video slots", "color:#88ffaa; font-size:12px");
+    // Silent ready — no console announcements, just a clean platform
+    // All iframe src attributes are empty. Paste your video embed URLs directly into each src=""
   })();
 </script>
 </body>
